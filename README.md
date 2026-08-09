@@ -36,3 +36,4 @@ Open [http://localhost:3000](http://localhost:3000) (redirects to `/en`).
 - `src/components` — layout, home sections, contact form, SEO
 - `public/images/keydtech-logo.png` — brand logo
 # keytech
+# keytech
