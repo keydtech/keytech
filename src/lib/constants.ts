@@ -1,10 +1,10 @@
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://keydtech.so";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://keydtech.com";
 
 export const SITE_NAME = "KeydTech";
 
 export const CONTACT = {
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@keydtech.so",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@keydtech.com",
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "+252 61 XXX XXXX",
   whatsappNumber:
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "252615000000",
