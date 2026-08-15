@@ -7,7 +7,7 @@ export const CONTACT = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@keydtech.com",
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "+252 61 XXX XXXX",
   whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "252615000000",
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "252617476312",
   address:
     process.env.NEXT_PUBLIC_ADDRESS ?? "Mogadishu, Somalia",
 } as const;
