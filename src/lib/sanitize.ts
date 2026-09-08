@@ -1,54 +1,78 @@
-import DOMPurify from "isomorphic-dompurify";
+import sanitizeHtml from "sanitize-html";
 
-const ALLOWED_TAGS = [
-  "p",
-  "br",
-  "strong",
-  "em",
-  "u",
-  "s",
-  "h2",
-  "h3",
-  "ul",
-  "ol",
-  "li",
-  "blockquote",
-  "a",
-  "img",
-  "iframe",
-  "div",
-  "span",
-  "hr",
-];
-
-const ALLOWED_ATTR = [
-  "href",
-  "target",
-  "rel",
-  "src",
-  "alt",
-  "title",
-  "class",
-  "width",
-  "height",
-  "allow",
-  "allowfullscreen",
-  "frameborder",
-  "referrerpolicy",
-  "data-youtube-video",
-];
-
-/** Strip executable HTML before storing or rendering blog content. */
+/**
+ * Server-safe HTML sanitizer (no jsdom).
+ * isomorphic-dompurify breaks on Vercel serverless and causes 500s.
+ */
 export function sanitizeBlogHtml(html: string): string {
   if (!html?.trim()) return "";
 
-  return DOMPurify.sanitize(html, {
-    ALLOWED_TAGS,
-    ALLOWED_ATTR,
-    ALLOW_DATA_ATTR: false,
-    ADD_ATTR: ["allowfullscreen", "referrerpolicy"],
-    FORBID_TAGS: ["script", "style", "object", "embed", "form", "input"],
-    FORBID_ATTR: ["style", "onerror", "onload", "onclick"],
+  return sanitizeHtml(html, {
+    allowedTags: [
+      "p",
+      "br",
+      "strong",
+      "em",
+      "b",
+      "i",
+      "u",
+      "s",
+      "h2",
+      "h3",
+      "ul",
+      "ol",
+      "li",
+      "blockquote",
+      "a",
+      "img",
+      "iframe",
+      "div",
+      "span",
+      "hr",
+    ],
+    allowedAttributes: {
+      a: ["href", "name", "target", "rel", "title"],
+      img: ["src", "alt", "title", "width", "height", "class"],
+      iframe: [
+        "src",
+        "width",
+        "height",
+        "allow",
+        "allowfullscreen",
+        "frameborder",
+        "referrerpolicy",
+        "class",
+        "title",
+      ],
+      div: ["class", "data-youtube-video"],
+      span: ["class"],
+      p: ["class"],
+      h2: ["class"],
+      h3: ["class"],
+      blockquote: ["class"],
+      ul: ["class"],
+      ol: ["class"],
+      li: ["class"],
+    },
+    allowedSchemes: ["https", "http", "mailto"],
+    allowedSchemesByTag: {
+      img: ["https", "http"],
+      iframe: ["https"],
+      a: ["https", "http", "mailto"],
+    },
+    allowedIframeHostnames: [
+      "www.youtube.com",
+      "youtube.com",
+      "www.youtube-nocookie.com",
+      "youtube-nocookie.com",
+    ],
+    allowProtocolRelative: false,
+    transformTags: {
+      a: sanitizeHtml.simpleTransform("a", {
+        rel: "noopener noreferrer",
+        target: "_blank",
+      }),
+    },
   });
 }
 

@@ -42,7 +42,6 @@ export function PostForm({
   const router = useRouter();
   const [localeTab, setLocaleTab] = useState<"en" | "so">("en");
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
     slug: initial?.slug ?? "",
     titleEn: initial?.titleEn ?? "",
@@ -84,7 +83,6 @@ export function PostForm({
       toast.success("Cover image uploaded");
     } catch (err) {
       const message = err instanceof Error ? err.message : "Upload failed";
-      setError(message);
       toast.error(message);
     }
   }
@@ -92,7 +90,6 @@ export function PostForm({
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setSaving(true);
-    setError(null);
     try {
       if (mode === "create") {
         const id = await createPost(form);
@@ -105,7 +102,6 @@ export function PostForm({
       } else if (postId) {
         const result = await updatePost(postId, form);
         if (!result.ok) {
-          setError(result.error);
           toast.error(result.error);
           return;
         }
@@ -117,8 +113,12 @@ export function PostForm({
         router.refresh();
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to save";
-      setError(message);
+      const raw = err instanceof Error ? err.message : "Failed to save";
+      const message =
+        raw.includes("Minified React error #441") ||
+        raw.includes("Server Components render")
+          ? "Server error while saving. Try again in a moment."
+          : raw;
       toast.error(message);
     } finally {
       setSaving(false);
@@ -278,7 +278,11 @@ export function PostForm({
           accept="image/*"
           onChange={(e) => {
             const file = e.target.files?.[0];
-            if (file) void onUpload(file).catch((err) => setError(String(err)));
+            if (file) {
+              void onUpload(file).catch((err) => {
+                toast.error(err instanceof Error ? err.message : String(err));
+              });
+            }
           }}
           className="text-sm text-slate-300"
         />
@@ -308,8 +312,6 @@ export function PostForm({
           textarea
         />
       </div>
-
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
 
       <button
         type="submit"
