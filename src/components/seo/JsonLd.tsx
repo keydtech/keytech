@@ -68,6 +68,6 @@ export function JsonLd({ locale, description }: JsonLdProps) {
 
 function getWhatsAppSameAs() {
   const number =
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "252617476312";
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "25261xxxxxxx";
   return `https://wa.me/${number}`;
 }

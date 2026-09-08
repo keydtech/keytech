@@ -20,12 +20,37 @@ export async function generateMetadata({
   };
 }
 
+function buildBlogQuery(filters: {
+  category?: string;
+  q?: string;
+  period?: string;
+  day?: string;
+  page?: string | number;
+}) {
+  const params = new URLSearchParams();
+  if (filters.category) params.set("category", filters.category);
+  if (filters.q) params.set("q", filters.q);
+  if (filters.period) params.set("period", filters.period);
+  if (filters.day) params.set("day", filters.day);
+  if (filters.page && Number(filters.page) > 1) {
+    params.set("page", String(filters.page));
+  }
+  const qs = params.toString();
+  return qs ? `/blog?${qs}` : "/blog";
+}
+
 export default async function BlogIndexPage({
   params,
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ category?: string; q?: string; page?: string }>;
+  searchParams: Promise<{
+    category?: string;
+    q?: string;
+    page?: string;
+    period?: string;
+    day?: string;
+  }>;
 }) {
   const { locale } = await params;
   const filters = await searchParams;
@@ -33,6 +58,14 @@ export default async function BlogIndexPage({
   const t = await getTranslations("Blog");
 
   const page = Number(filters.page || "1") || 1;
+  const hasFilters = Boolean(
+    filters.category || filters.q || filters.period || filters.day,
+  );
+  const emptyFiltered =
+    locale === "so"
+      ? "Maqaallo kuma jiraan filter-yadan."
+      : "No articles match these filters.";
+  const emptyDefault = t("empty");
 
   let posts: Awaited<ReturnType<typeof getPublishedPosts>>["posts"] = [];
   let totalPages = 1;
@@ -45,6 +78,8 @@ export default async function BlogIndexPage({
         category: filters.category,
         q: filters.q,
         page,
+        period: filters.period,
+        day: filters.day,
       }),
       getBlogCategories(),
     ]);
@@ -77,8 +112,6 @@ export default async function BlogIndexPage({
           <Suspense fallback={null}>
             <BlogFilters
               allLabel={t("allCategories")}
-              searchLabel={t("search")}
-              searchPlaceholder={t("searchPlaceholder")}
               categories={categories.map((category) => ({
                 slug: category.slug,
                 label: isSo ? category.nameSo : category.nameEn,
@@ -89,9 +122,11 @@ export default async function BlogIndexPage({
         </div>
 
         {posts.length === 0 ? (
-          <p className="mt-16 text-center text-muted-fg">{t("empty")}</p>
+          <p className="mt-16 text-center text-muted-fg">
+            {hasFilters ? emptyFiltered : emptyDefault}
+          </p>
         ) : (
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {posts.map((post, index) => (
               <PostCard
                 key={post.id}
@@ -100,10 +135,10 @@ export default async function BlogIndexPage({
                 title={isSo ? post.titleSo : post.titleEn}
                 excerpt={isSo ? post.excerptSo : post.excerptEn}
                 coverImageUrl={post.coverImageUrl}
-                dateLabel={(post.publishedAt ?? post.createdAt).toLocaleDateString(
-                  locale,
-                  { year: "numeric", month: "short", day: "numeric" },
-                )}
+                date={post.publishedAt ?? post.createdAt}
+                locale={locale}
+                authorName={post.author.name}
+                authorAvatarUrl={post.author.avatarUrl}
                 categories={post.categories.map((item) =>
                   isSo ? item.category.nameSo : item.category.nameEn,
                 )}
@@ -116,13 +151,10 @@ export default async function BlogIndexPage({
           <div className="mt-12 flex items-center justify-center gap-3">
             {currentPage > 1 ? (
               <Link
-                href={`/blog?${new URLSearchParams({
-                  ...(filters.category
-                    ? { category: filters.category }
-                    : {}),
-                  ...(filters.q ? { q: filters.q } : {}),
-                  page: String(currentPage - 1),
-                }).toString()}`}
+                href={buildBlogQuery({
+                  ...filters,
+                  page: currentPage - 1,
+                })}
                 className="rounded-xl border border-border px-4 py-2 text-sm font-semibold"
               >
                 {t("prev")}
@@ -133,13 +165,10 @@ export default async function BlogIndexPage({
             </span>
             {currentPage < totalPages ? (
               <Link
-                href={`/blog?${new URLSearchParams({
-                  ...(filters.category
-                    ? { category: filters.category }
-                    : {}),
-                  ...(filters.q ? { q: filters.q } : {}),
-                  page: String(currentPage + 1),
-                }).toString()}`}
+                href={buildBlogQuery({
+                  ...filters,
+                  page: currentPage + 1,
+                })}
                 className="rounded-xl border border-border px-4 py-2 text-sm font-semibold"
               >
                 {t("next")}

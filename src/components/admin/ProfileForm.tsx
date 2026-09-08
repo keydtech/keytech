@@ -1,35 +1,61 @@
 "use client";
 
 import { updateProfile } from "@/lib/actions/admin";
+import { uploadAvatar } from "@/lib/actions/upload";
+import Image from "next/image";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 export function ProfileForm({
   name,
   username,
+  avatarUrl,
 }: {
   name: string;
   username: string;
+  avatarUrl?: string | null;
 }) {
   const [form, setForm] = useState({
     name,
     username,
     currentPassword: "",
     newPassword: "",
+    avatarUrl: avatarUrl ?? "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function onAvatar(file: File) {
+    try {
+      const body = new FormData();
+      body.set("file", file);
+      const url = await uploadAvatar(body);
+      setForm((p) => ({ ...p, avatarUrl: url }));
+      toast.success("Photo uploaded — save profile to apply");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    }
+  }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
-    setMessage(null);
-    setError(null);
+    if (form.newPassword && form.newPassword.length < 8) {
+      toast.error("New password must be at least 8 characters");
+      return;
+    }
+    setBusy(true);
     try {
-      await updateProfile(form);
+      const result = await updateProfile(form);
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
       setForm((p) => ({ ...p, currentPassword: "", newPassword: "" }));
-      setMessage("Profile updated.");
+      toast.success("Profile updated");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed");
+      toast.error(err instanceof Error ? err.message : "Update failed");
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -38,6 +64,48 @@ export function ProfileForm({
       onSubmit={onSubmit}
       className="mx-auto max-w-lg space-y-4 rounded-2xl border border-white/10 bg-[#0c121e] p-6"
     >
+        <div className="flex items-center gap-4">
+          <div className="relative h-16 w-16 overflow-hidden rounded-full bg-gradient-to-br from-navy to-[#123456] ring-2 ring-teal/40 ring-offset-2 ring-offset-[#0c121e]">
+            {form.avatarUrl &&
+            !form.avatarUrl.toLowerCase().includes("logo") ? (
+              <Image
+                src={form.avatarUrl}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="64px"
+              />
+            ) : form.avatarUrl ? (
+              <Image
+                src="/images/avatar-keydtech.png"
+                alt=""
+                fill
+                className="object-cover"
+                sizes="64px"
+              />
+            ) : (
+              <span className="flex h-full w-full items-center justify-center font-display text-lg font-bold text-teal">
+                {form.name.slice(0, 1).toUpperCase() || "?"}
+              </span>
+            )}
+          </div>
+          <div>
+            <p className="text-sm font-medium text-slate-200">Profile photo</p>
+            <p className="mt-0.5 text-xs text-slate-500">
+              Use a clear face photo (square). Full logos look unclear in the circle.
+            </p>
+            <input
+              type="file"
+              accept="image/*"
+              className="mt-2 block w-full text-xs text-slate-400"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) void onAvatar(file);
+              }}
+            />
+          </div>
+        </div>
+
       <label className="block text-sm">
         <span className="mb-1.5 block text-slate-200">Display name</span>
         <input
@@ -68,7 +136,9 @@ export function ProfileForm({
         />
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block text-slate-200">New password</span>
+        <span className="mb-1.5 block text-slate-200">
+          New password (optional, min 8)
+        </span>
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
@@ -87,13 +157,12 @@ export function ProfileForm({
           </button>
         </div>
       </label>
-      {message ? <p className="text-sm text-teal">{message}</p> : null}
-      {error ? <p className="text-sm text-red-400">{error}</p> : null}
       <button
         type="submit"
-        className="rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-midnight"
+        disabled={busy}
+        className="rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-midnight disabled:opacity-60"
       >
-        Save profile
+        {busy ? "Saving…" : "Save profile"}
       </button>
     </form>
   );

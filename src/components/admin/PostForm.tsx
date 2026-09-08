@@ -5,6 +5,7 @@ import { createPost, updatePost } from "@/lib/actions/admin";
 import { uploadCoverImage } from "@/lib/actions/upload";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 type CategoryOption = { id: string; nameEn: string };
 
@@ -69,10 +70,17 @@ export function PostForm({
   }
 
   async function onUpload(file: File) {
-    const body = new FormData();
-    body.set("file", file);
-    const url = await uploadCoverImage(body);
-    setForm((prev) => ({ ...prev, coverImageUrl: url }));
+    try {
+      const body = new FormData();
+      body.set("file", file);
+      const url = await uploadCoverImage(body);
+      setForm((prev) => ({ ...prev, coverImageUrl: url }));
+      toast.success("Cover image uploaded");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Upload failed";
+      setError(message);
+      toast.error(message);
+    }
   }
 
   async function onSubmit(event: FormEvent) {
@@ -82,13 +90,17 @@ export function PostForm({
     try {
       if (mode === "create") {
         const id = await createPost(form);
+        toast.success("Post created");
         router.push(`/admin/posts/${id}/edit`);
       } else if (postId) {
         await updatePost(postId, form);
+        toast.success("Post saved");
         router.refresh();
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to save");
+      const message = err instanceof Error ? err.message : "Failed to save";
+      setError(message);
+      toast.error(message);
     } finally {
       setSaving(false);
     }

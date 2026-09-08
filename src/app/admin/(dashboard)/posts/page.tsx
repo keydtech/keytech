@@ -57,10 +57,10 @@ export default async function AdminPostsPage() {
                   {post.updatedAt.toLocaleDateString()}
                 </td>
                 <td className="px-4 py-3">
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Link
                       href={`/admin/posts/${post.id}/edit`}
-                      className="text-teal hover:underline"
+                      className="rounded-lg border border-white/10 px-2.5 py-1 text-xs font-semibold text-offwhite hover:border-teal/50 hover:text-teal"
                     >
                       Edit
                     </Link>

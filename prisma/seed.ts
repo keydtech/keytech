@@ -17,13 +17,15 @@ async function main() {
       passwordHash,
       role: Role.SUPER_ADMIN,
       active: true,
+      avatarUrl: "/images/avatar-keydtech.png",
     },
     create: {
       name: "KeydTech Admin",
       username,
-      email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@keydtech.com",
+      email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "keydtechnology@gmail.com",
       passwordHash,
       role: Role.SUPER_ADMIN,
+      avatarUrl: "/images/avatar-keydtech.png",
     },
   });
 

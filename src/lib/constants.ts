@@ -4,10 +4,10 @@ export const SITE_URL =
 export const SITE_NAME = "KeydTech";
 
 export const CONTACT = {
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@keydtech.com",
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "+252 61 XXX XXXX",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "keydtechnology@gmail.com",
   whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "252617476312",
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "25261xxxxxxx",
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "+252 61 XXX XXXX",
   address:
     process.env.NEXT_PUBLIC_ADDRESS ?? "Mogadishu, Somalia",
 } as const;

@@ -8,8 +8,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
+  // Explicit static imports so Turbopack always picks up message edits.
+  const messages =
+    locale === "so"
+      ? (await import("../messages/so.json")).default
+      : (await import("../messages/en.json")).default;
+
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages,
   };
 });

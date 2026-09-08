@@ -8,7 +8,7 @@ import Image from "next/image";
 type LogoProps = {
   className?: string;
   priority?: boolean;
-  /** Keep a light plate behind the mark (footer / dark surfaces). */
+  /** Use light wordmark for navy/dark footer surfaces. */
   onDarkSurface?: boolean;
 };
 
@@ -21,28 +21,35 @@ export function Logo({
     <Link
       href="/"
       className={cn(
-        "group inline-flex shrink-0 items-center transition-opacity hover:opacity-90",
+        "group relative inline-flex shrink-0 items-center transition-opacity hover:opacity-90",
         className,
       )}
       aria-label={SITE_NAME}
     >
-      <span
+      {/* Light backgrounds: navy wordmark */}
+      <Image
+        src="/images/keydtech-logo-transparent.png"
+        alt={SITE_NAME}
+        width={220}
+        height={56}
+        priority={priority}
         className={cn(
-          "inline-flex items-center rounded-xl",
-          onDarkSurface
-            ? "bg-white px-2.5 py-1.5"
-            : "dark:bg-white dark:px-2.5 dark:py-1.5",
+          "h-9 w-auto max-w-[9.5rem] object-contain object-left sm:h-10 sm:max-w-none md:h-12 lg:h-14",
+          onDarkSurface ? "hidden" : "block dark:hidden",
         )}
-      >
-        <Image
-          src="/images/keydtech-logo-transparent.png"
-          alt={SITE_NAME}
-          width={220}
-          height={56}
-          priority={priority}
-          className="h-9 w-auto max-w-[9.5rem] object-contain object-left sm:h-10 sm:max-w-none md:h-12 lg:h-14"
-        />
-      </span>
+      />
+      {/* Dark backgrounds / dark mode: light wordmark */}
+      <Image
+        src="/images/keydtech-logo-on-dark.png"
+        alt={SITE_NAME}
+        width={220}
+        height={56}
+        priority={priority}
+        className={cn(
+          "h-9 w-auto max-w-[9.5rem] object-contain object-left sm:h-10 sm:max-w-none md:h-12 lg:h-14",
+          onDarkSurface ? "block" : "hidden dark:block",
+        )}
+      />
     </Link>
   );
 }
