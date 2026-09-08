@@ -17,6 +17,7 @@
   "Nav": {
     "home": "Home",
     "solutions": "Solutions",
+    "blog": "Blog",
     "pricing": "Pricing / Demos",
     "about": "About",
     "contact": "Contact",
@@ -223,6 +224,21 @@
   "WhatsApp": {
     "label": "WhatsApp Us Immediately",
     "aria": "Chat with KeydTech on WhatsApp"
+  },
+  "Blog": {
+    "metaTitle": "Blog | KeydTech Insights — Odoo & Business Systems",
+    "metaDescription": "Practical guides on Odoo ERP, retail POS, inventory, and growing businesses in Mogadishu and Somalia.",
+    "eyebrow": "Insights",
+    "title": "KeydTech Blog",
+    "subtitle": "Practical writing on Odoo ERP, retail operations, and digital systems for Somali businesses.",
+    "allCategories": "All",
+    "search": "Search",
+    "searchPlaceholder": "Search articles…",
+    "empty": "No published articles yet. Check back soon.",
+    "prev": "Previous",
+    "next": "Next",
+    "back": "Back to blog",
+    "related": "Related articles"
   },
   "Common": {
     "learnMore": "Learn more",

@@ -1,28 +1,9 @@
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import { ThemeScript } from "@/providers/ThemeScript";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { notFound } from "next/navigation";
-import "../globals.css";
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap",
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -112,25 +93,9 @@ export default async function LocaleLayout({
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return (
-    <html
-      lang={locale}
-      className={`${sora.variable} ${jakarta.variable} h-full`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-full bg-background font-sans text-foreground antialiased">
-        <ThemeScript />
-        <JsonLd locale={locale} description={t("description")} />
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <div className="flex min-h-full flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-            <WhatsAppButton floating />
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <JsonLd locale={locale} description={t("description")} />
+      {children}
+    </NextIntlClientProvider>
   );
 }

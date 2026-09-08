@@ -17,6 +17,7 @@
   "Nav": {
     "home": "Hore",
     "solutions": "Xalalka",
+    "blog": "Blog",
     "pricing": "Qiimaha",
     "about": "Ku saabsan",
     "contact": "Xiriir",
@@ -223,6 +224,21 @@
   "WhatsApp": {
     "label": "Si degdeg ah noogu soo qor WhatsApp",
     "aria": "Kula sheekeyso KeydTech WhatsApp"
+  },
+  "Blog": {
+    "metaTitle": "Blog | KeydTech — Odoo & Nidaamyada Ganacsiga",
+    "metaDescription": "Hagayaal wax ku ool ah oo ku saabsan Odoo ERP, POS, kaydka, iyo ganacsiga Muqdisho iyo Soomaaliya.",
+    "eyebrow": "Aragtiyo",
+    "title": "Blog-ga KeydTech",
+    "subtitle": "Qoraallo wax ku ool ah oo ku saabsan Odoo ERP, hawlgalka tukaamada, iyo nidaamyada digital ee ganacsatada Soomaaliyeed.",
+    "allCategories": "Dhammaan",
+    "search": "Raadi",
+    "searchPlaceholder": "Raadi maqaallo…",
+    "empty": "Weli ma jiraan maqaallo la daabacay. Markale soo noqo.",
+    "prev": "Hore",
+    "next": "Xiga",
+    "back": "Ku noqo blog-ga",
+    "related": "Maqaallo la xiriira"
   },
   "Common": {
     "learnMore": "Wax badan ogow",

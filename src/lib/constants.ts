@@ -22,6 +22,7 @@ export function getWhatsAppUrl(message: string = WHATSAPP_PREFILL) {
 export const NAV_ITEMS = [
   { href: "/", key: "home" as const },
   { href: "/solutions", key: "solutions" as const },
+  { href: "/blog", key: "blog" as const },
   { href: "/pricing", key: "pricing" as const },
   { href: "/about", key: "about" as const },
   { href: "/contact", key: "contact" as const },

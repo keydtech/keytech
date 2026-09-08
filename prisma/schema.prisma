@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  username     String   @unique
+  email        String?  @unique
+  passwordHash String
+  role         Role     @default(AUTHOR)
+  avatarUrl    String?
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]
+}
+
+model Category {
+  id             String         @id @default(cuid())
+  slug           String         @unique
+  nameEn         String
+  nameSo         String
+  descriptionEn  String?
+  descriptionSo  String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  posts          PostCategory[]
+}
+
+model Post {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  titleEn       String
+  titleSo       String
+  excerptEn     String         @default("")
+  excerptSo     String         @default("")
+  contentEn     String         @default("")
+  contentSo     String         @default("")
+  coverImageUrl String?
+  status        PostStatus     @default(DRAFT)
+  publishedAt   DateTime?
+  seoTitleEn    String?
+  seoTitleSo    String?
+  seoDescEn     String?
+  seoDescSo     String?
+  authorId      String
+  author        User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  categories    PostCategory[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([authorId])
+}
+
+model PostCategory {
+  postId     String
+  categoryId String
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([postId, categoryId])
+}
