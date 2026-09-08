@@ -3,6 +3,7 @@
 import {
   actionFail,
   actionOk,
+  toActionError,
   type ActionResult,
 } from "@/lib/actions/action-utils";
 import { auth } from "@/lib/auth";
@@ -13,6 +14,7 @@ import {
   canPublish,
 } from "@/lib/auth/rbac";
 import { prisma } from "@/lib/db";
+import { sanitizeBlogHtml, sanitizeMediaUrl } from "@/lib/sanitize";
 import { slugify } from "@/lib/slug";
 import { PostStatus, Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
@@ -118,7 +120,7 @@ const postSchema = z.object({
   contentEn: z.string().optional(),
   contentSo: z.string().optional(),
   coverImageUrl: z.string().max(500).optional().or(z.literal("")),
-  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]),
+  status: z.enum(["DRAFT", "PENDING_REVIEW", "PUBLISHED", "ARCHIVED"]),
   categoryIds: z.array(z.string()).default([]),
   seoTitleEn: z.string().max(200).optional(),
   seoTitleSo: z.string().max(200).optional(),
@@ -126,115 +128,184 @@ const postSchema = z.object({
   seoDescSo: z.string().max(300).optional(),
 });
 
-export async function createPost(input: z.infer<typeof postSchema>) {
-  const user = await requireUser();
-  const data = postSchema.parse(input);
+/** Authors may only draft or submit for review; editors/admins set any status. */
+function resolvePostStatus(role: Role, requested: PostStatus): PostStatus {
+  if (canPublish(role)) return requested;
+  if (requested === PostStatus.PENDING_REVIEW) return PostStatus.PENDING_REVIEW;
+  return PostStatus.DRAFT;
+}
 
-  let status = data.status as PostStatus;
-  if (status === PostStatus.PUBLISHED && !canPublish(user.role)) {
-    status = PostStatus.DRAFT;
-  }
-
-  const slug = slugify(data.slug || data.titleEn);
-
-  const post = await prisma.post.create({
-    data: {
-      slug,
-      titleEn: data.titleEn,
-      titleSo: data.titleSo,
-      excerptEn: data.excerptEn ?? "",
-      excerptSo: data.excerptSo ?? "",
-      contentEn: data.contentEn ?? "",
-      contentSo: data.contentSo ?? "",
-      coverImageUrl: data.coverImageUrl || null,
-      status,
-      publishedAt: status === PostStatus.PUBLISHED ? new Date() : null,
-      authorId: user.id,
-      seoTitleEn: data.seoTitleEn || null,
-      seoTitleSo: data.seoTitleSo || null,
-      seoDescEn: data.seoDescEn || null,
-      seoDescSo: data.seoDescSo || null,
-      categories: {
-        create: data.categoryIds.map((categoryId) => ({ categoryId })),
-      },
-    },
-  });
-
+function revalidateBlogPaths(slug?: string, postId?: string) {
   revalidatePath("/admin/posts");
   revalidatePath("/en/blog");
   revalidatePath("/so/blog");
-  return post.id;
+  if (postId) revalidatePath(`/admin/posts/${postId}/edit`);
+  if (slug) {
+    revalidatePath(`/en/blog/${slug}`);
+    revalidatePath(`/so/blog/${slug}`);
+  }
+}
+
+export async function createPost(input: z.infer<typeof postSchema>) {
+  try {
+    const user = await requireUser();
+    const data = postSchema.parse(input);
+    const status = resolvePostStatus(user.role, data.status as PostStatus);
+    const slug = slugify(data.slug || data.titleEn);
+    const coverImageUrl = sanitizeMediaUrl(data.coverImageUrl);
+
+    const post = await prisma.post.create({
+      data: {
+        slug,
+        titleEn: data.titleEn,
+        titleSo: data.titleSo,
+        excerptEn: data.excerptEn ?? "",
+        excerptSo: data.excerptSo ?? "",
+        contentEn: sanitizeBlogHtml(data.contentEn ?? ""),
+        contentSo: sanitizeBlogHtml(data.contentSo ?? ""),
+        coverImageUrl,
+        status,
+        publishedAt: status === PostStatus.PUBLISHED ? new Date() : null,
+        authorId: user.id,
+        seoTitleEn: data.seoTitleEn || null,
+        seoTitleSo: data.seoTitleSo || null,
+        seoDescEn: data.seoDescEn || null,
+        seoDescSo: data.seoDescSo || null,
+        categories: {
+          create: data.categoryIds.map((categoryId) => ({ categoryId })),
+        },
+      },
+    });
+
+    revalidateBlogPaths(slug);
+    return post.id;
+  } catch (err) {
+    throw toActionError(err);
+  }
 }
 
 export async function updatePost(
   id: string,
   input: z.infer<typeof postSchema>,
-) {
-  const user = await requireUser();
-  const existing = await prisma.post.findUnique({ where: { id } });
-  if (!existing) throw new Error("Not found");
-  if (!canEditPost(user.role, existing.authorId, user.id)) {
-    throw new Error("Forbidden");
-  }
+): Promise<ActionResult> {
+  try {
+    const user = await requireUser();
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) throw new Error("Not found");
+    if (!canEditPost(user.role, existing.authorId, user.id)) {
+      throw new Error("Forbidden");
+    }
 
-  const data = postSchema.parse(input);
-  let status = data.status as PostStatus;
-  if (
-    status === PostStatus.PUBLISHED &&
-    existing.status !== PostStatus.PUBLISHED &&
-    !canPublish(user.role)
-  ) {
-    status = PostStatus.DRAFT;
-  }
+    const data = postSchema.parse(input);
+    let status = resolvePostStatus(user.role, data.status as PostStatus);
 
-  const slug = slugify(data.slug || data.titleEn);
+    // Authors cannot keep a live post published — edits require re-approval.
+    if (!canPublish(user.role) && existing.status === PostStatus.PUBLISHED) {
+      status =
+        data.status === PostStatus.PENDING_REVIEW
+          ? PostStatus.PENDING_REVIEW
+          : PostStatus.DRAFT;
+    }
 
-  await prisma.post.update({
-    where: { id },
-    data: {
-      slug,
-      titleEn: data.titleEn,
-      titleSo: data.titleSo,
-      excerptEn: data.excerptEn ?? "",
-      excerptSo: data.excerptSo ?? "",
-      contentEn: data.contentEn ?? "",
-      contentSo: data.contentSo ?? "",
-      coverImageUrl: data.coverImageUrl || null,
-      status,
-      publishedAt:
-        status === PostStatus.PUBLISHED
-          ? (existing.publishedAt ?? new Date())
-          : existing.publishedAt,
-      seoTitleEn: data.seoTitleEn || null,
-      seoTitleSo: data.seoTitleSo || null,
-      seoDescEn: data.seoDescEn || null,
-      seoDescSo: data.seoDescSo || null,
-      categories: {
-        deleteMany: {},
-        create: data.categoryIds.map((categoryId) => ({ categoryId })),
+    const slug = slugify(data.slug || data.titleEn);
+    const coverImageUrl = sanitizeMediaUrl(data.coverImageUrl);
+
+    await prisma.post.update({
+      where: { id },
+      data: {
+        slug,
+        titleEn: data.titleEn,
+        titleSo: data.titleSo,
+        excerptEn: data.excerptEn ?? "",
+        excerptSo: data.excerptSo ?? "",
+        contentEn: sanitizeBlogHtml(data.contentEn ?? ""),
+        contentSo: sanitizeBlogHtml(data.contentSo ?? ""),
+        coverImageUrl,
+        status,
+        publishedAt:
+          status === PostStatus.PUBLISHED
+            ? (existing.publishedAt ?? new Date())
+            : status === PostStatus.ARCHIVED
+              ? existing.publishedAt
+              : null,
+        seoTitleEn: data.seoTitleEn || null,
+        seoTitleSo: data.seoTitleSo || null,
+        seoDescEn: data.seoDescEn || null,
+        seoDescSo: data.seoDescSo || null,
+        categories: {
+          deleteMany: {},
+          create: data.categoryIds.map((categoryId) => ({ categoryId })),
+        },
       },
-    },
-  });
+    });
 
-  revalidatePath("/admin/posts");
-  revalidatePath(`/admin/posts/${id}/edit`);
-  revalidatePath("/en/blog");
-  revalidatePath("/so/blog");
-  revalidatePath(`/en/blog/${slug}`);
-  revalidatePath(`/so/blog/${slug}`);
+    revalidateBlogPaths(slug, id);
+    return actionOk();
+  } catch (err) {
+    return actionFail(err);
+  }
 }
 
-export async function deletePost(id: string) {
-  const user = await requireUser();
-  const existing = await prisma.post.findUnique({ where: { id } });
-  if (!existing) throw new Error("Not found");
-  if (!canEditPost(user.role, existing.authorId, user.id)) {
-    throw new Error("Forbidden");
+export async function approvePost(id: string): Promise<ActionResult> {
+  try {
+    const user = await requireUser();
+    if (!canPublish(user.role)) throw new Error("Forbidden");
+
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) throw new Error("Not found");
+
+    await prisma.post.update({
+      where: { id },
+      data: {
+        status: PostStatus.PUBLISHED,
+        publishedAt: existing.publishedAt ?? new Date(),
+      },
+    });
+
+    revalidateBlogPaths(existing.slug, id);
+    return actionOk();
+  } catch (err) {
+    return actionFail(err);
   }
-  await prisma.post.delete({ where: { id } });
-  revalidatePath("/admin/posts");
-  revalidatePath("/en/blog");
-  revalidatePath("/so/blog");
+}
+
+export async function rejectPost(id: string): Promise<ActionResult> {
+  try {
+    const user = await requireUser();
+    if (!canPublish(user.role)) throw new Error("Forbidden");
+
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) throw new Error("Not found");
+
+    await prisma.post.update({
+      where: { id },
+      data: {
+        status: PostStatus.DRAFT,
+        publishedAt: null,
+      },
+    });
+
+    revalidateBlogPaths(existing.slug, id);
+    return actionOk();
+  } catch (err) {
+    return actionFail(err);
+  }
+}
+
+export async function deletePost(id: string): Promise<ActionResult> {
+  try {
+    const user = await requireUser();
+    const existing = await prisma.post.findUnique({ where: { id } });
+    if (!existing) throw new Error("Not found");
+    if (!canEditPost(user.role, existing.authorId, user.id)) {
+      throw new Error("Forbidden");
+    }
+    await prisma.post.delete({ where: { id } });
+    revalidateBlogPaths(existing.slug);
+    return actionOk();
+  } catch (err) {
+    return actionFail(err);
+  }
 }
 
 const userSchema = z.object({

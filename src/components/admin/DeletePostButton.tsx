@@ -18,7 +18,11 @@ export function DeletePostButton({ id }: { id: string }) {
         if (!window.confirm("Delete this post? This cannot be undone.")) return;
         setBusy(true);
         void deletePost(id)
-          .then(() => {
+          .then((result) => {
+            if (!result.ok) {
+              toast.error(result.error);
+              return;
+            }
             toast.success("Post deleted");
             router.refresh();
           })

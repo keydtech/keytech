@@ -1,12 +1,11 @@
 import { CategoriesManager } from "@/components/admin/CategoriesManager";
-import { canManageCategories } from "@/lib/auth/rbac";
-import { requireSession } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function CategoriesPage() {
-  const session = await requireSession();
+  const session = await requireRole(["SUPER_ADMIN", "EDITOR"]);
   const categories = await prisma.category.findMany({
     orderBy: { nameEn: "asc" },
   });
@@ -19,10 +18,7 @@ export default async function CategoriesPage() {
           Organize posts for filters on the public blog.
         </p>
       </div>
-      <CategoriesManager
-        categories={categories}
-        canManage={canManageCategories(session.user.role)}
-      />
+      <CategoriesManager categories={categories} canManage />
     </div>
   );
 }

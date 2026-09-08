@@ -28,6 +28,7 @@ type AdminShellProps = {
   userName: string;
   userRole: string;
   showUsers?: boolean;
+  showCategories?: boolean;
   children: React.ReactNode;
 };
 
@@ -35,11 +36,16 @@ export function AdminShell({
   userName,
   userRole,
   showUsers = false,
+  showCategories = true,
   children,
 }: AdminShellProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const nav = NAV.filter((item) => item.href !== "/admin/users" || showUsers);
+  const nav = NAV.filter((item) => {
+    if (item.href === "/admin/users" && !showUsers) return false;
+    if (item.href === "/admin/categories" && !showCategories) return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-[#070b12] text-offwhite">

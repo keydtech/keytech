@@ -3,6 +3,7 @@ import { PostCard } from "@/components/blog/PostCard";
 import { Link } from "@/i18n/navigation";
 import { getPostBySlug, getRelatedPosts } from "@/lib/blog";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { sanitizeBlogHtml } from "@/lib/sanitize";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -59,7 +60,8 @@ export default async function BlogPostPage({
 
   const isSo = locale === "so";
   const title = isSo ? post.titleSo : post.titleEn;
-  const content = isSo ? post.contentSo : post.contentEn;
+  const rawContent = isSo ? post.contentSo : post.contentEn;
+  const content = sanitizeBlogHtml(rawContent);
   const categoryIds = post.categories.map((item) => item.categoryId);
   const related = await getRelatedPosts(post.slug, categoryIds).catch(() => []);
   const published = post.publishedAt ?? post.createdAt;

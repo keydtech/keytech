@@ -23,7 +23,7 @@ type PostFormProps = {
     contentEn: string;
     contentSo: string;
     coverImageUrl: string;
-    status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
+    status: "DRAFT" | "PENDING_REVIEW" | "PUBLISHED" | "ARCHIVED";
     categoryIds: string[];
     seoTitleEn: string;
     seoTitleSo: string;
@@ -52,7 +52,13 @@ export function PostForm({
     contentEn: initial?.contentEn ?? "",
     contentSo: initial?.contentSo ?? "",
     coverImageUrl: initial?.coverImageUrl ?? "",
-    status: initial?.status ?? ("DRAFT" as const),
+    status: (() => {
+      const s = initial?.status ?? ("DRAFT" as const);
+      if (!canPublish && (s === "PUBLISHED" || s === "ARCHIVED")) {
+        return "DRAFT" as const;
+      }
+      return s;
+    })(),
     categoryIds: initial?.categoryIds ?? ([] as string[]),
     seoTitleEn: initial?.seoTitleEn ?? "",
     seoTitleSo: initial?.seoTitleSo ?? "",
@@ -90,11 +96,24 @@ export function PostForm({
     try {
       if (mode === "create") {
         const id = await createPost(form);
-        toast.success("Post created");
+        toast.success(
+          form.status === "PENDING_REVIEW"
+            ? "Submitted for review"
+            : "Post created",
+        );
         router.push(`/admin/posts/${id}/edit`);
       } else if (postId) {
-        await updatePost(postId, form);
-        toast.success("Post saved");
+        const result = await updatePost(postId, form);
+        if (!result.ok) {
+          setError(result.error);
+          toast.error(result.error);
+          return;
+        }
+        toast.success(
+          form.status === "PENDING_REVIEW"
+            ? "Submitted for review"
+            : "Post saved",
+        );
         router.refresh();
       }
     } catch (err) {
@@ -108,6 +127,12 @@ export function PostForm({
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
+      {!canPublish && initial?.status === "PUBLISHED" ? (
+        <p className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
+          This post is live. Saving as an author unpublishes it until an editor
+          or admin approves again — use “Submit for review” when ready.
+        </p>
+      ) : null}
       <div className="flex flex-wrap gap-2">
         {(["en", "so"] as const).map((tab) => (
           <button
@@ -195,14 +220,27 @@ export function PostForm({
             className="w-full rounded-xl border border-white/10 bg-midnight px-3 py-2.5 text-offwhite"
           >
             <option value="DRAFT">Draft</option>
-            {canPublish ? <option value="PUBLISHED">Published</option> : null}
-            <option value="ARCHIVED">Archived</option>
+            {!canPublish ? (
+              <option value="PENDING_REVIEW">Submit for review</option>
+            ) : null}
+            {canPublish ? (
+              <>
+                <option value="PENDING_REVIEW">Pending review</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="ARCHIVED">Archived</option>
+              </>
+            ) : null}
           </select>
           {!canPublish ? (
             <span className="mt-1 block text-xs text-slate-400">
-              Authors save drafts — editors publish.
+              Authors cannot publish. Choose “Submit for review” so an editor
+              or admin can approve it for the public site.
             </span>
-          ) : null}
+          ) : (
+            <span className="mt-1 block text-xs text-slate-400">
+              Approve pending posts to make them public, or publish directly.
+            </span>
+          )}
         </label>
       </div>
 

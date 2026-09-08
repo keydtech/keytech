@@ -1,23 +1,31 @@
 import { DeletePostButton } from "@/components/admin/DeletePostButton";
-import { canPublish } from "@/lib/auth/rbac";
+import { ReviewPostButtons } from "@/components/admin/ReviewPostButtons";
+import { canEditAllPosts, canPublish } from "@/lib/auth/rbac";
 import { requireSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
+const STATUS_LABEL: Record<string, string> = {
+  DRAFT: "Draft",
+  PENDING_REVIEW: "Pending review",
+  PUBLISHED: "Published",
+  ARCHIVED: "Archived",
+};
+
 export default async function AdminPostsPage() {
   const session = await requireSession();
+  const canSeeAll = canEditAllPosts(session.user.role);
+  const publisher = canPublish(session.user.role);
+
   const posts = await prisma.post.findMany({
+    where: canSeeAll ? undefined : { authorId: session.user.id },
     orderBy: { updatedAt: "desc" },
     include: {
       author: { select: { id: true, name: true } },
     },
   });
-
-  const visible = canPublish(session.user.role)
-    ? posts
-    : posts.filter((post) => post.authorId === session.user.id);
 
   return (
     <div className="space-y-6">
@@ -25,7 +33,9 @@ export default async function AdminPostsPage() {
         <div>
           <h1 className="font-display text-2xl font-semibold">Posts</h1>
           <p className="text-sm text-slate-400">
-            Create and manage blog articles.
+            {publisher
+              ? "Review author submissions and publish when ready."
+              : "Write drafts and submit them for editor approval."}
           </p>
         </div>
         <Link
@@ -48,10 +58,22 @@ export default async function AdminPostsPage() {
             </tr>
           </thead>
           <tbody>
-            {visible.map((post) => (
+            {posts.map((post) => (
               <tr key={post.id} className="border-b border-white/5">
                 <td className="px-4 py-3 font-medium">{post.titleEn}</td>
-                <td className="px-4 py-3">{post.status}</td>
+                <td className="px-4 py-3">
+                  <span
+                    className={
+                      post.status === "PENDING_REVIEW"
+                        ? "text-amber-300"
+                        : post.status === "PUBLISHED"
+                          ? "text-teal"
+                          : "text-slate-300"
+                    }
+                  >
+                    {STATUS_LABEL[post.status] ?? post.status}
+                  </span>
+                </td>
                 <td className="px-4 py-3">{post.author.name}</td>
                 <td className="px-4 py-3 text-slate-400">
                   {post.updatedAt.toLocaleDateString()}
@@ -64,12 +86,15 @@ export default async function AdminPostsPage() {
                     >
                       Edit
                     </Link>
+                    {publisher ? (
+                      <ReviewPostButtons id={post.id} status={post.status} />
+                    ) : null}
                     <DeletePostButton id={post.id} />
                   </div>
                 </td>
               </tr>
             ))}
-            {visible.length === 0 ? (
+            {posts.length === 0 ? (
               <tr>
                 <td
                   colSpan={5}

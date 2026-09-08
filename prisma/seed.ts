@@ -14,10 +14,10 @@ async function main() {
     where: { username },
     update: {
       name: "KeydTech Admin",
-      passwordHash,
       role: Role.SUPER_ADMIN,
       active: true,
       avatarUrl: "/images/avatar-keydtech.png",
+      // Do not overwrite passwordHash on re-seed — preserves production password.
     },
     create: {
       name: "KeydTech Admin",

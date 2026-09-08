@@ -15,6 +15,7 @@ enum Role {
 
 enum PostStatus {
   DRAFT
+  PENDING_REVIEW
   PUBLISHED
   ARCHIVED
 }

@@ -23,22 +23,26 @@ export default async function AdminDashboardPage() {
 
   const authorFilter = seeAllPosts ? {} : { authorId: userId };
 
-  const [published, drafts, categories, users, recent] = await Promise.all([
-    prisma.post.count({
-      where: { status: "PUBLISHED", ...authorFilter },
-    }),
-    prisma.post.count({
-      where: { status: "DRAFT", ...authorFilter },
-    }),
-    seeCategories ? prisma.category.count() : Promise.resolve(0),
-    seeUsers ? prisma.user.count() : Promise.resolve(0),
-    prisma.post.findMany({
-      where: authorFilter,
-      orderBy: { updatedAt: "desc" },
-      take: 6,
-      include: { author: { select: { name: true } } },
-    }),
-  ]);
+  const [published, drafts, pendingReview, categories, users, recent] =
+    await Promise.all([
+      prisma.post.count({
+        where: { status: "PUBLISHED", ...authorFilter },
+      }),
+      prisma.post.count({
+        where: { status: "DRAFT", ...authorFilter },
+      }),
+      prisma.post.count({
+        where: { status: "PENDING_REVIEW", ...authorFilter },
+      }),
+      seeCategories ? prisma.category.count() : Promise.resolve(0),
+      seeUsers ? prisma.user.count() : Promise.resolve(0),
+      prisma.post.findMany({
+        where: authorFilter,
+        orderBy: { updatedAt: "desc" },
+        take: 6,
+        include: { author: { select: { name: true } } },
+      }),
+    ]);
 
   const cards = [
     {
@@ -50,6 +54,12 @@ export default async function AdminDashboardPage() {
     {
       label: isAuthor ? "My drafts" : "Drafts",
       value: drafts,
+      icon: FileText,
+      show: true,
+    },
+    {
+      label: isAuthor ? "Awaiting review" : "Pending review",
+      value: pendingReview,
       icon: FileText,
       show: true,
     },
@@ -90,7 +100,7 @@ export default async function AdminDashboardPage() {
 
       <div
         className={`grid gap-4 sm:grid-cols-2 ${
-          cards.length >= 4 ? "xl:grid-cols-4" : "xl:grid-cols-2"
+          cards.length >= 4 ? "xl:grid-cols-4" : "xl:grid-cols-3"
         }`}
       >
         {cards.map(({ label, value, icon: Icon }) => (

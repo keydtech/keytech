@@ -1,5 +1,5 @@
 import { AdminShell } from "@/components/admin/AdminShell";
-import { canManageUsers } from "@/lib/auth/rbac";
+import { canManageCategories, canManageUsers } from "@/lib/auth/rbac";
 import { requireSession } from "@/lib/auth/session";
 
 export default async function AdminDashboardLayout({
@@ -14,6 +14,7 @@ export default async function AdminDashboardLayout({
       userName={session.user.name}
       userRole={session.user.role}
       showUsers={canManageUsers(session.user.role)}
+      showCategories={canManageCategories(session.user.role)}
     >
       {children}
     </AdminShell>
