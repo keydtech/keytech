@@ -9,16 +9,14 @@ import { getWhatsAppUrl, NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, MessageCircle, X } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export function Header() {
   const t = useTranslations("Nav");
-  const locale = useLocale();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const isSomali = locale === "so";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -40,23 +38,15 @@ export function Header() {
           : "border-transparent bg-[var(--header-bg)]/70 backdrop-blur-md",
       )}
     >
-      <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center gap-2 px-4 sm:h-20 sm:gap-3 sm:px-6 lg:h-[5.25rem] lg:px-8">
-        <Logo priority className="min-w-0 shrink" />
+      <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center gap-3 px-4 sm:h-[4.75rem] sm:px-6 lg:px-8">
+        <Logo priority className="min-w-0 shrink-0" />
 
+        {/* Desktop nav — xl+ only so 7 links never collide with language controls */}
         <nav
-          className={cn(
-            "mx-auto hidden min-w-0 flex-1 items-center justify-center",
-            // Somali labels need more room — show desktop nav from xl up
-            isSomali ? "xl:flex" : "lg:flex",
-          )}
+          className="mx-3 hidden min-w-0 flex-1 items-center justify-center xl:flex"
           aria-label="Primary"
         >
-          <div
-            className={cn(
-              "flex max-w-full items-center",
-              isSomali ? "gap-0.5" : "gap-1",
-            )}
-          >
+          <div className="flex flex-wrap items-center justify-center gap-x-0.5 gap-y-1">
             {NAV_ITEMS.map((item) => {
               const active =
                 item.href === "/"
@@ -67,10 +57,7 @@ export function Header() {
                   key={item.key}
                   href={item.href}
                   className={cn(
-                    "shrink-0 whitespace-nowrap rounded-xl font-semibold tracking-tight transition-colors",
-                    isSomali
-                      ? "px-2 py-2 text-sm xl:px-2.5 xl:text-[0.95rem]"
-                      : "px-3 py-2.5 text-[0.95rem] lg:px-3.5 lg:text-base",
+                    "shrink-0 whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold tracking-tight transition-colors 2xl:px-3 2xl:text-[0.95rem]",
                     active
                       ? "text-navy dark:text-teal"
                       : "text-muted-fg hover:text-foreground",
@@ -83,44 +70,30 @@ export function Header() {
           </div>
         </nav>
 
-        <div
-          className={cn(
-            "ml-auto hidden shrink-0 items-center gap-2",
-            isSomali ? "xl:flex" : "lg:flex",
-          )}
-        >
-          <LanguageSwitcher />
+        <div className="ml-auto hidden shrink-0 items-center gap-2 xl:flex">
+          <LanguageSwitcher compact />
           <ThemeToggle />
           <Button
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
             variant="whatsapp"
-            className={cn(
-              "whitespace-nowrap",
-              isSomali
-                ? "min-h-10 px-3.5 py-2 text-sm"
-                : "min-h-11 px-5 py-2.5 text-[0.95rem]",
-            )}
+            className="min-h-10 whitespace-nowrap px-3.5 py-2 text-sm"
           >
-            <MessageCircle className="h-5 w-5 shrink-0" aria-hidden />
+            <MessageCircle className="h-4 w-4 shrink-0" aria-hidden />
             {t("cta")}
           </Button>
         </div>
 
-        <div
-          className={cn(
-            "ml-auto flex shrink-0 items-center gap-2",
-            isSomali ? "xl:hidden" : "lg:hidden",
-          )}
-        >
-          <LanguageSwitcher />
+        {/* Mobile / tablet: language + theme + hamburger (no overlapping desktop nav) */}
+        <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 xl:hidden">
+          <LanguageSwitcher compact />
           <ThemeToggle />
           <IconButton
             aria-label={open ? t("closeMenu") : t("openMenu")}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="h-11 w-11 border border-border bg-surface/50"
+            className="h-10 w-10 border border-border bg-surface/50 sm:h-11 sm:w-11"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </IconButton>
@@ -134,21 +107,27 @@ export function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className={cn(
-              "overflow-hidden border-t border-border bg-[var(--header-bg)] backdrop-blur-xl",
-              isSomali ? "xl:hidden" : "lg:hidden",
-            )}
+            className="overflow-hidden border-t border-border bg-[var(--header-bg)] backdrop-blur-xl xl:hidden"
           >
-            <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-5 sm:px-6">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.key}
-                  href={item.href}
-                  className="rounded-xl px-4 py-3.5 text-base font-semibold text-foreground hover:bg-muted"
-                >
-                  {t(item.key)}
-                </Link>
-              ))}
+            <nav className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-5 sm:px-6">
+              {NAV_ITEMS.map((item) => {
+                const active =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    className={cn(
+                      "rounded-xl px-4 py-3.5 text-base font-semibold hover:bg-muted",
+                      active ? "text-teal" : "text-foreground",
+                    )}
+                  >
+                    {t(item.key)}
+                  </Link>
+                );
+              })}
               <div className="mt-3 border-t border-border pt-4">
                 <Button
                   href={getWhatsAppUrl()}

@@ -1,12 +1,19 @@
 import {
   canEditAllPosts,
   canManageCategories,
+  canManageClients,
   canManageUsers,
 } from "@/lib/auth/rbac";
 import { requireSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import { Role } from "@prisma/client";
-import { FileText, FolderOpen, Newspaper, Users } from "lucide-react";
+import {
+  FileText,
+  FolderOpen,
+  Handshake,
+  Newspaper,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -19,11 +26,12 @@ export default async function AdminDashboardPage() {
   const seeAllPosts = canEditAllPosts(role);
   const seeCategories = canManageCategories(role);
   const seeUsers = canManageUsers(role);
+  const seeClients = canManageClients(role);
   const seeInsights = !isAuthor;
 
   const authorFilter = seeAllPosts ? {} : { authorId: userId };
 
-  const [published, drafts, pendingReview, categories, users, recent] =
+  const [published, drafts, pendingReview, categories, users, clients, recent] =
     await Promise.all([
       prisma.post.count({
         where: { status: "PUBLISHED", ...authorFilter },
@@ -36,6 +44,7 @@ export default async function AdminDashboardPage() {
       }),
       seeCategories ? prisma.category.count() : Promise.resolve(0),
       seeUsers ? prisma.user.count() : Promise.resolve(0),
+      seeClients ? prisma.client.count() : Promise.resolve(0),
       prisma.post.findMany({
         where: authorFilter,
         orderBy: { updatedAt: "desc" },
@@ -50,30 +59,42 @@ export default async function AdminDashboardPage() {
       value: published,
       icon: Newspaper,
       show: true,
+      href: "/admin/posts",
     },
     {
       label: isAuthor ? "My drafts" : "Drafts",
       value: drafts,
       icon: FileText,
       show: true,
+      href: "/admin/posts",
     },
     {
       label: isAuthor ? "Awaiting review" : "Pending review",
       value: pendingReview,
       icon: FileText,
       show: true,
+      href: "/admin/posts",
+    },
+    {
+      label: "Clients",
+      value: clients,
+      icon: Handshake,
+      show: seeClients,
+      href: "/admin/clients",
     },
     {
       label: "Categories",
       value: categories,
       icon: FolderOpen,
       show: seeCategories,
+      href: "/admin/categories",
     },
     {
       label: "Users",
       value: users,
       icon: Users,
       show: seeUsers,
+      href: "/admin/users",
     },
   ].filter((card) => card.show);
 
@@ -90,31 +111,56 @@ export default async function AdminDashboardPage() {
               : "KeydTech content operations at a glance."}
           </p>
         </div>
-        <Link
-          href="/admin/posts/new"
-          className="rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-midnight hover:bg-teal-dim"
-        >
-          New post
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          {seeClients ? (
+            <Link
+              href="/admin/clients"
+              className="rounded-xl border border-teal/40 px-4 py-2.5 text-sm font-semibold text-teal hover:bg-teal/10"
+            >
+              Manage clients
+            </Link>
+          ) : null}
+          <Link
+            href="/admin/posts/new"
+            className="rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-midnight hover:bg-teal-dim"
+          >
+            New post
+          </Link>
+        </div>
       </div>
 
       <div
         className={`grid gap-4 sm:grid-cols-2 ${
-          cards.length >= 4 ? "xl:grid-cols-4" : "xl:grid-cols-3"
+          cards.length >= 4 ? "xl:grid-cols-3 2xl:grid-cols-4" : "xl:grid-cols-3"
         }`}
       >
-        {cards.map(({ label, value, icon: Icon }) => (
-          <div
-            key={label}
-            className="rounded-2xl border border-white/10 bg-[#0c121e] p-5"
-          >
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-400">{label}</p>
-              <Icon className="h-4 w-4 text-teal" />
+        {cards.map(({ label, value, icon: Icon, href }) => {
+          const body = (
+            <>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-slate-400">{label}</p>
+                <Icon className="h-4 w-4 text-teal" />
+              </div>
+              <p className="mt-3 font-display text-3xl font-semibold">{value}</p>
+            </>
+          );
+          return href ? (
+            <Link
+              key={label}
+              href={href}
+              className="rounded-2xl border border-white/10 bg-[#0c121e] p-5 transition hover:border-teal/40"
+            >
+              {body}
+            </Link>
+          ) : (
+            <div
+              key={label}
+              className="rounded-2xl border border-white/10 bg-[#0c121e] p-5"
+            >
+              {body}
             </div>
-            <p className="mt-3 font-display text-3xl font-semibold">{value}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <section className="rounded-2xl border border-white/10 bg-[#0c121e] p-5">
