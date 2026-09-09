@@ -29,8 +29,12 @@ export function ProfileForm({
     try {
       const body = new FormData();
       body.set("file", file);
-      const url = await uploadAvatar(body);
-      setForm((p) => ({ ...p, avatarUrl: url }));
+      const result = await uploadAvatar(body);
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
+      setForm((p) => ({ ...p, avatarUrl: result.url }));
       toast.success("Photo uploaded — save profile to apply");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Upload failed");

@@ -122,11 +122,18 @@ export function RichTextEditor({
     try {
       const body = new FormData();
       body.set("file", file);
-      const url = await uploadEditorImage(body);
+      const result = await uploadEditorImage(body);
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
       editor!
         .chain()
         .focus()
-        .setImage({ src: url, alt: file.name.replace(/\.[^.]+$/, "") })
+        .setImage({
+          src: result.url,
+          alt: file.name.replace(/\.[^.]+$/, ""),
+        })
         .run();
       toast.success("Image inserted");
     } catch (err) {

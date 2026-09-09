@@ -77,6 +77,7 @@ export function ClientsManager({
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [statForm, setStatForm] = useState(stats);
 
   const isEditing = editingId !== null;
@@ -104,13 +105,17 @@ export function ClientsManager({
   }
 
   async function onUpload(file: File) {
+    setUploading(true);
+    const toastId = toast.loading("Uploading logo…");
     try {
       if (!file.type && !/\.(jpe?g|png|webp|gif)$/i.test(file.name)) {
-        toast.error("Only JPEG, PNG, WebP, or GIF images are allowed");
+        toast.error("Only JPEG, PNG, WebP, or GIF images are allowed", {
+          id: toastId,
+        });
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        toast.error("Image must be under 5MB");
+        toast.error("Image must be under 5MB", { id: toastId });
         return;
       }
 
@@ -118,11 +123,11 @@ export function ClientsManager({
       body.set("file", file);
       const result = await uploadClientLogo(body);
       if (!result.ok) {
-        toast.error(result.error);
+        toast.error(result.error, { id: toastId });
         return;
       }
       setForm((prev) => ({ ...prev, logoUrl: result.url }));
-      toast.success("Logo uploaded");
+      toast.success("Logo uploaded — now click Save client", { id: toastId });
     } catch (err) {
       const raw = err instanceof Error ? err.message : "Upload failed";
       const message =
@@ -130,12 +135,22 @@ export function ClientsManager({
         raw.includes("Server Components render")
           ? "Logo upload failed. Use a JPEG/PNG under 5MB and try again."
           : raw;
-      toast.error(message);
+      toast.error(message, { id: toastId });
+    } finally {
+      setUploading(false);
     }
   }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (uploading) {
+      toast.error("Wait for the logo upload to finish, then save");
+      return;
+    }
+    if (!form.logoUrl.trim()) {
+      // Allow save without logo, but warn clearly.
+      toast.message("Saving without a logo URL");
+    }
     setBusy(true);
     try {
       const payload = { ...form };
@@ -357,6 +372,7 @@ export function ClientsManager({
             <input
               type="file"
               accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,.jpeg,.jpg,.png,.webp,.gif"
+              disabled={uploading || busy}
               onChange={(e) => {
                 const input = e.currentTarget;
                 const file = input.files?.[0];
@@ -366,9 +382,12 @@ export function ClientsManager({
                   });
                 }
               }}
-              className="text-xs text-slate-300"
+              className="text-xs text-slate-300 disabled:opacity-50"
             />
           </div>
+          {uploading ? (
+            <p className="mt-1 text-xs text-teal">Uploading logo… wait until the URL appears, then save.</p>
+          ) : null}
         </label>
 
         <label className="text-sm">
@@ -440,10 +459,16 @@ export function ClientsManager({
 
         <button
           type="submit"
-          disabled={busy}
+          disabled={busy || uploading}
           className="rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-midnight disabled:opacity-60 md:col-span-2"
         >
-          {busy ? "Saving…" : isEditing ? "Save client" : "Add client"}
+          {uploading
+            ? "Uploading logo…"
+            : busy
+              ? "Saving…"
+              : isEditing
+                ? "Save client"
+                : "Add client"}
         </button>
       </form>
 

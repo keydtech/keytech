@@ -113,8 +113,8 @@ export async function deleteCategory(id: string): Promise<ActionResult> {
 
 const postSchema = z.object({
   slug: z.string().min(2).max(120).optional(),
-  titleEn: z.string().min(3).max(200),
-  titleSo: z.string().min(3).max(200),
+  titleEn: z.string().min(3, "English title is required (min 3 chars)").max(200),
+  titleSo: z.string().min(3, "Somali title is required (min 3 chars)").max(200),
   excerptEn: z.string().max(500).optional(),
   excerptSo: z.string().max(500).optional(),
   contentEn: z.string().optional(),
@@ -146,12 +146,17 @@ function revalidateBlogPaths(slug?: string, postId?: string) {
   }
 }
 
-export async function createPost(input: z.infer<typeof postSchema>) {
+export async function createPost(
+  input: z.infer<typeof postSchema>,
+): Promise<{ ok: true; id: string } | { ok: false; error: string }> {
   try {
     const user = await requireUser();
     const data = postSchema.parse(input);
     const status = resolvePostStatus(user.role, data.status as PostStatus);
     const slug = slugify(data.slug || data.titleEn);
+    if (!slug || slug.length < 2) {
+      throw new Error("Add a valid English title (used for the URL slug)");
+    }
     const coverImageUrl = sanitizeMediaUrl(data.coverImageUrl);
 
     const post = await prisma.post.create({
@@ -178,9 +183,9 @@ export async function createPost(input: z.infer<typeof postSchema>) {
     });
 
     revalidateBlogPaths(slug);
-    return post.id;
+    return { ok: true, id: post.id };
   } catch (err) {
-    throw toActionError(err);
+    return { ok: false, error: toActionError(err).message };
   }
 }
 

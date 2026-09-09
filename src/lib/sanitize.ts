@@ -83,7 +83,9 @@ export function sanitizeMediaUrl(url: string | null | undefined): string | null 
   const value = (url ?? "").trim();
   if (!value) return null;
   if (!SAFE_URL.test(value)) {
-    throw new Error("Invalid image URL");
+    throw new Error(
+      "Invalid image URL. Upload an image or use https:// /uploads/ /images/ /api/media/",
+    );
   }
   if (value.startsWith("https://")) {
     try {
@@ -93,7 +95,7 @@ export function sanitizeMediaUrl(url: string | null | undefined): string | null 
       throw new Error("Invalid image URL");
     }
   }
-  if (value.startsWith("/api/media/") && value.includes("..")) {
+  if (value.includes("..")) {
     throw new Error("Invalid image URL");
   }
   return value;

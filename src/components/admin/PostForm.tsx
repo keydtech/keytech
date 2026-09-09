@@ -42,6 +42,7 @@ export function PostForm({
   const router = useRouter();
   const [localeTab, setLocaleTab] = useState<"en" | "so">("en");
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     slug: initial?.slug ?? "",
     titleEn: initial?.titleEn ?? "",
@@ -75,30 +76,49 @@ export function PostForm({
   }
 
   async function onUpload(file: File) {
+    setUploading(true);
     try {
       const body = new FormData();
       body.set("file", file);
-      const url = await uploadCoverImage(body);
-      setForm((prev) => ({ ...prev, coverImageUrl: url }));
+      const result = await uploadCoverImage(body);
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
+      setForm((prev) => ({ ...prev, coverImageUrl: result.url }));
       toast.success("Cover image uploaded");
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Upload failed";
-      toast.error(message);
+      const raw = err instanceof Error ? err.message : "Upload failed";
+      toast.error(
+        raw.includes("Minified React error #441")
+          ? "Cover upload failed. Try a smaller JPEG/PNG."
+          : raw,
+      );
+    } finally {
+      setUploading(false);
     }
   }
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (uploading) {
+      toast.error("Wait for the image upload to finish");
+      return;
+    }
     setSaving(true);
     try {
       if (mode === "create") {
-        const id = await createPost(form);
+        const result = await createPost(form);
+        if (!result.ok) {
+          toast.error(result.error);
+          return;
+        }
         toast.success(
           form.status === "PENDING_REVIEW"
             ? "Submitted for review"
             : "Post created",
         );
-        router.push(`/admin/posts/${id}/edit`);
+        router.push(`/admin/posts/${result.id}/edit`);
       } else if (postId) {
         const result = await updatePost(postId, form);
         if (!result.ok) {
@@ -117,7 +137,7 @@ export function PostForm({
       const message =
         raw.includes("Minified React error #441") ||
         raw.includes("Server Components render")
-          ? "Server error while saving. Try again in a moment."
+          ? "Server error while saving. Check titles (EN + SO) and try again."
           : raw;
       toast.error(message);
     } finally {
@@ -315,10 +335,16 @@ export function PostForm({
 
       <button
         type="submit"
-        disabled={saving}
+        disabled={saving || uploading}
         className="rounded-xl bg-teal px-5 py-2.5 text-sm font-semibold text-midnight hover:bg-teal-dim disabled:opacity-60"
       >
-        {saving ? "Saving…" : mode === "create" ? "Create post" : "Save changes"}
+        {saving || uploading
+          ? uploading
+            ? "Uploading…"
+            : "Saving…"
+          : mode === "create"
+            ? "Create post"
+            : "Save changes"}
       </button>
     </form>
   );
