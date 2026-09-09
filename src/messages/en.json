@@ -12,7 +12,9 @@
     "aboutTitle": "About KeydTech | Technology Company in Mogadishu",
     "aboutDescription": "Learn about KeydTech — a Mogadishu technology company delivering apps, websites, custom systems, and Odoo ERP for Somali businesses.",
     "contactTitle": "Contact KeydTech | WhatsApp & Email",
-    "contactDescription": "Contact KeydTech in Mogadishu for apps, websites, systems, or an Odoo ERP demo. WhatsApp or email us."
+    "contactDescription": "Contact KeydTech in Mogadishu for apps, websites, systems, or an Odoo ERP demo. WhatsApp or email us.",
+    "clientsTitle": "Clients & Partners | KeydTech",
+    "clientsDescription": "See the companies and organizations KeydTech builds for — Odoo ERP, apps, websites, and custom systems in Somalia."
   },
   "Nav": {
     "home": "Home",
@@ -26,7 +28,8 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleTheme": "Toggle color theme",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "clients": "Clients"
   },
   "Hero": {
     "brand": "KeydTech",
@@ -321,9 +324,9 @@
     "backHome": "Back to home"
   },
   "Clients": {
-    "eyebrow": "Trusted partners",
-    "title": "Companies that build with KeydTech",
-    "subtitle": "From Odoo ERP rollouts to apps and websites — these are the teams and organizations we deliver for across Somalia.",
+    "eyebrow": "Proof in production",
+    "title": "Partners who ship with KeydTech",
+    "subtitle": "Real companies. Real systems. From Odoo ERP to apps and websites across Somalia.",
     "empty": "Client stories are being prepared. Check back soon.",
     "stats": {
       "years": "Years of expertise",
@@ -349,6 +352,16 @@
       "SYSTEM": "Custom system",
       "POS_RETAIL": "Retail POS",
       "OTHER": "Technology project"
-    }
+    },
+    "viewAll": "View all clients",
+    "viewAllHint": "See the full partner gallery",
+    "pageEyebrow": "Client gallery",
+    "pageTitle": "All KeydTech clients",
+    "pageSubtitle": "Explore every partner and the work we delivered — filter by industry or project type.",
+    "filterAll": "All",
+    "filterIndustry": "Industry",
+    "filterWork": "Work type",
+    "countLabel": "{count} partners",
+    "orbitLabel": "In motion with our partners"
   }
 }

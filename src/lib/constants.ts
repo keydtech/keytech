@@ -46,6 +46,7 @@ export function getMailtoUrl(subject: string, body: string) {
 export const NAV_ITEMS = [
   { href: "/", key: "home" as const },
   { href: "/solutions", key: "solutions" as const },
+  { href: "/clients", key: "clients" as const },
   { href: "/blog", key: "blog" as const },
   { href: "/pricing", key: "pricing" as const },
   { href: "/about", key: "about" as const },

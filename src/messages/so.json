@@ -12,7 +12,9 @@
     "aboutTitle": "Ku saabsan KeydTech | Shirkad Technology Muqdisho",
     "aboutDescription": "Baro KeydTech — shirkad technology ah oo Muqdisho ku taal oo bixisa apps, websites, nidaamyo gaar ah, iyo Odoo ERP.",
     "contactTitle": "Nala soo xiriir | WhatsApp & Email",
-    "contactDescription": "Nala soo xiriir si aad u hesho apps, websites, systems, ama demo Odoo. WhatsApp ama email noo soo dir."
+    "contactDescription": "Nala soo xiriir si aad u hesho apps, websites, systems, ama demo Odoo. WhatsApp ama email noo soo dir.",
+    "clientsTitle": "Clients & Wadaagayaal | KeydTech",
+    "clientsDescription": "Arag shirkadaha iyo hay'adaha KeydTech u dhiseyso — Odoo ERP, apps, websites, iyo nidaamyo gaar ah oo Soomaaliya."
   },
   "Nav": {
     "home": "Hore",
@@ -26,7 +28,8 @@
     "openMenu": "Fur menu-ga",
     "closeMenu": "Xir menu-ga",
     "toggleTheme": "Beddel midabka",
-    "switchLanguage": "Beddel luqadda"
+    "switchLanguage": "Beddel luqadda",
+    "clients": "Clients"
   },
   "Hero": {
     "brand": "KeydTech",
@@ -321,9 +324,9 @@
     "backHome": "Ku noqo bogga hore"
   },
   "Clients": {
-    "eyebrow": "Wadaagayaasha lagu kalsoon yahay",
-    "title": "Shirkadaha KeydTech la shaqeeyso",
-    "subtitle": "Laga bilaabo Odoo ERP illaa apps iyo websites — kuwani waa kooxaha iyo hay'adaha aan u bixino xalalka Soomaaliya oo dhan.",
+    "eyebrow": "Caddayn shaqo",
+    "title": "Wadaagayaasha KeydTech la shaqeeyso",
+    "subtitle": "Shirkado dhab ah. Nidaamyo dhab ah. Laga bilaabo Odoo ERP illaa apps iyo websites Soomaaliya oo dhan.",
     "empty": "Sheekooyinka clients-ka waa la diyaarinayaa. Markale soo noqo.",
     "stats": {
       "years": "Sanooyin khibrad",
@@ -349,6 +352,16 @@
       "SYSTEM": "Nidaam gaar ah",
       "POS_RETAIL": "POS Tukaan",
       "OTHER": "Mashruuc technology"
-    }
+    },
+    "viewAll": "Dhammaan clients-ka eeg",
+    "viewAllHint": "Eeg gallery-ga wadaagayaasha oo dhan",
+    "pageEyebrow": "Gallery-ga clients",
+    "pageTitle": "Dhammaan clients-ka KeydTech",
+    "pageSubtitle": "Baadh wadaag kasta iyo shaqada aan u qabanay — ku sifee warshad ama nooca mashruuca.",
+    "filterAll": "Dhammaan",
+    "filterIndustry": "Warshadda",
+    "filterWork": "Nooca shaqada",
+    "countLabel": "{count} wadaagayaal",
+    "orbitLabel": "Dhaqdhaqaaq wadaagayaasheenna"
   }
 }

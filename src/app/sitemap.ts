@@ -3,7 +3,15 @@ import { SITE_URL } from "@/lib/constants";
 import { prisma } from "@/lib/db";
 import type { MetadataRoute } from "next";
 
-const PATHS = ["", "/solutions", "/blog", "/pricing", "/about", "/contact"];
+const PATHS = [
+  "",
+  "/solutions",
+  "/clients",
+  "/blog",
+  "/pricing",
+  "/about",
+  "/contact",
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];

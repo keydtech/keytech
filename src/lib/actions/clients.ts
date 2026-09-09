@@ -25,6 +25,8 @@ function revalidateClients() {
   revalidatePath("/admin/clients");
   revalidatePath("/en");
   revalidatePath("/so");
+  revalidatePath("/en/clients");
+  revalidatePath("/so/clients");
   revalidatePath("/en/about");
   revalidatePath("/so/about");
 }
