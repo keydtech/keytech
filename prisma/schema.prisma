@@ -80,3 +80,51 @@ model PostCategory {
 
   @@id([postId, categoryId])
 }
+
+enum ClientIndustry {
+  RETAIL
+  PHARMACY
+  ELECTRONICS
+  WHOLESALE
+  SERVICES
+  MANUFACTURING
+  NGO
+  GOVERNMENT
+  OTHER
+}
+
+enum ClientWorkType {
+  ODOO
+  WEBSITE
+  APP
+  SYSTEM
+  POS_RETAIL
+  OTHER
+}
+
+model Client {
+  id             String          @id @default(cuid())
+  name           String
+  slug           String          @unique
+  logoUrl        String?
+  industry       ClientIndustry  @default(OTHER)
+  workType       ClientWorkType  @default(ODOO)
+  descriptionEn  String          @default("")
+  descriptionSo  String          @default("")
+  websiteUrl     String?
+  featured       Boolean         @default(true)
+  published      Boolean         @default(true)
+  sortOrder      Int             @default(0)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([published, featured, sortOrder])
+}
+
+model SiteSettings {
+  id                 String   @id @default("default")
+  yearsExperience    Int      @default(8)
+  projectsCompleted  Int      @default(48)
+  expertsOnTeam      Int      @default(12)
+  updatedAt          DateTime @updatedAt
+}

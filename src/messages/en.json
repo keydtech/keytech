@@ -45,32 +45,56 @@
       "retail": {
         "title": "Retail Stores & Supermarkets",
         "description": "Fast POS, automated inventory, and barcode systems that keep shelves stocked and checkouts moving.",
-        "features": ["Point of Sale", "Automated Inventory", "Barcode System"]
+        "features": [
+          "Point of Sale",
+          "Automated Inventory",
+          "Barcode System"
+        ]
       },
       "electronics": {
         "title": "Electronics & Appliance Shops",
         "description": "Track every device with serial numbers, warranties, and repair workflows your customers trust.",
-        "features": ["Serial Number Tracking", "Warranty Management", "Repair Tickets"]
+        "features": [
+          "Serial Number Tracking",
+          "Warranty Management",
+          "Repair Tickets"
+        ]
       },
       "pharmacy": {
         "title": "Pharmacies & Healthcare",
         "description": "Batch and expiry control with clear sales and prescription logs for safer, compliant operations.",
-        "features": ["Batch & Expiry Dates", "Sales Logs", "Prescription Records"]
+        "features": [
+          "Batch & Expiry Dates",
+          "Sales Logs",
+          "Prescription Records"
+        ]
       },
       "wholesale": {
         "title": "Wholesale & Distribution",
         "description": "Run multi-warehouse stock, purchase orders, and logistics from one connected system.",
-        "features": ["Multi-Warehouse", "Purchase Orders", "Logistics Coordination"]
+        "features": [
+          "Multi-Warehouse",
+          "Purchase Orders",
+          "Logistics Coordination"
+        ]
       },
       "services": {
         "title": "Service & Consultancy Companies",
         "description": "Win clients with CRM, send invoices automatically, and keep expenses under control.",
-        "features": ["CRM Pipeline", "Automated Invoicing", "Expense Tracking"]
+        "features": [
+          "CRM Pipeline",
+          "Automated Invoicing",
+          "Expense Tracking"
+        ]
       },
       "manufacturing": {
         "title": "Manufacturing & Garment Workshops",
         "description": "Manage bills of materials, work orders, and supply chains with production clarity.",
-        "features": ["Bill of Materials", "Work Orders", "Supply Chain"]
+        "features": [
+          "Bill of Materials",
+          "Work Orders",
+          "Supply Chain"
+        ]
       }
     }
   },
@@ -295,5 +319,36 @@
   "Common": {
     "learnMore": "Learn more",
     "backHome": "Back to home"
+  },
+  "Clients": {
+    "eyebrow": "Trusted partners",
+    "title": "Companies that build with KeydTech",
+    "subtitle": "From Odoo ERP rollouts to apps and websites — these are the teams and organizations we deliver for across Somalia.",
+    "empty": "Client stories are being prepared. Check back soon.",
+    "stats": {
+      "years": "Years of expertise",
+      "projects": "Projects delivered",
+      "experts": "Specialists on the team",
+      "clients": "Clients & partners"
+    },
+    "industry": {
+      "RETAIL": "Retail",
+      "PHARMACY": "Pharmacy",
+      "ELECTRONICS": "Electronics",
+      "WHOLESALE": "Wholesale",
+      "SERVICES": "Services",
+      "MANUFACTURING": "Manufacturing",
+      "NGO": "NGO",
+      "GOVERNMENT": "Government",
+      "OTHER": "Other"
+    },
+    "work": {
+      "ODOO": "Odoo ERP",
+      "WEBSITE": "Website",
+      "APP": "App",
+      "SYSTEM": "Custom system",
+      "POS_RETAIL": "Retail POS",
+      "OTHER": "Technology project"
+    }
   }
 }

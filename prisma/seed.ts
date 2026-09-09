@@ -140,6 +140,112 @@ async function main() {
 
   console.log(`Seeded admin user: ${username}`);
   console.log("Seeded categories and sample post.");
+
+  await prisma.siteSettings.upsert({
+    where: { id: "default" },
+    create: {
+      id: "default",
+      yearsExperience: 8,
+      projectsCompleted: 48,
+      expertsOnTeam: 12,
+    },
+    update: {},
+  });
+
+  const sampleClients = [
+    {
+      slug: "hormuud-retail-partner",
+      name: "Banadir Retail Group",
+      industry: "RETAIL" as const,
+      workType: "ODOO" as const,
+      descriptionEn: "Multi-branch POS and inventory rollout with live stock visibility.",
+      descriptionSo: "Hirgelinta POS iyo kaydka laamo badan oo leh aragti kayd oo toos ah.",
+      featured: true,
+      published: true,
+      sortOrder: 1,
+      logoUrl: "/images/keydtech-mark.png",
+    },
+    {
+      slug: "mogadishu-pharmacy-chain",
+      name: "Raaxo Pharmacy",
+      industry: "PHARMACY" as const,
+      workType: "POS_RETAIL" as const,
+      descriptionEn: "Batch/expiry control and faster checkout for busy pharmacy counters.",
+      descriptionSo: "Kontoroolka batch/expiry iyo lacag-qaadis degdeg ah oo farmashiye.",
+      featured: true,
+      published: true,
+      sortOrder: 2,
+      logoUrl: "/images/avatar-keydtech.png",
+    },
+    {
+      slug: "somali-ngo-systems",
+      name: "Barwaaqo NGO",
+      industry: "NGO" as const,
+      workType: "SYSTEM" as const,
+      descriptionEn: "Custom reporting system for field programs and donor updates.",
+      descriptionSo: "Nidaam warbixin oo gaar ah oo loogu talagalay barnaamijyada iyo deeq-bixiyayaasha.",
+      featured: true,
+      published: true,
+      sortOrder: 3,
+      logoUrl: "/images/keydtech-logo-transparent.png",
+    },
+    {
+      slug: "electronics-hub-web",
+      name: "Gulf Electronics Hub",
+      industry: "ELECTRONICS" as const,
+      workType: "WEBSITE" as const,
+      descriptionEn: "Modern product website with inquiry flows for appliance buyers.",
+      descriptionSo: "Website alaab oo casri ah oo leh codsiyo degdeg ah oo iibsadayaasha.",
+      featured: true,
+      published: true,
+      sortOrder: 4,
+      logoUrl: "/images/keydtech-logo.png",
+    },
+    {
+      slug: "logistics-app-build",
+      name: "Sahal Logistics",
+      industry: "WHOLESALE" as const,
+      workType: "APP" as const,
+      descriptionEn: "Operations app for dispatch tracking and warehouse handoffs.",
+      descriptionSo: "App hawlgalka oo la socodka dirista iyo bakhaarka.",
+      featured: true,
+      published: true,
+      sortOrder: 5,
+      logoUrl: "/images/keydtech-logo-on-dark.png",
+    },
+    {
+      slug: "services-crm-odoo",
+      name: "Horizon Consultancy",
+      industry: "SERVICES" as const,
+      workType: "ODOO" as const,
+      descriptionEn: "CRM and invoicing configured for professional services teams.",
+      descriptionSo: "CRM iyo invoice oo loo habeeyey kooxaha adeegga xirfadlayaasha.",
+      featured: true,
+      published: true,
+      sortOrder: 6,
+      logoUrl: null,
+    },
+  ];
+
+  for (const client of sampleClients) {
+    await prisma.client.upsert({
+      where: { slug: client.slug },
+      update: {
+        name: client.name,
+        industry: client.industry,
+        workType: client.workType,
+        descriptionEn: client.descriptionEn,
+        descriptionSo: client.descriptionSo,
+        featured: client.featured,
+        published: client.published,
+        sortOrder: client.sortOrder,
+        logoUrl: client.logoUrl,
+      },
+      create: client,
+    });
+  }
+
+  console.log("Seeded site stats and sample clients.");
 }
 
 main()

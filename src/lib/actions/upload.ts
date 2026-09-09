@@ -82,3 +82,12 @@ export async function uploadEditorImage(formData: FormData) {
   assertImageFile(file);
   return storeFile(file, "uploads/blog");
 }
+
+export async function uploadClientLogo(formData: FormData) {
+  const user = await requireAuth();
+  if (user.role !== "SUPER_ADMIN") throw new Error("Forbidden");
+  const file = formData.get("file");
+  if (!(file instanceof File)) throw new Error("No file provided");
+  assertImageFile(file);
+  return storeFile(file, "uploads/clients");
+}

@@ -45,32 +45,56 @@
       "retail": {
         "title": "Tukaamada & Suuqyada Waaweyn",
         "description": "POS degdeg ah, kayd otomaatik ah, iyo nidaam barcode ah oo kaydka iyo lacag-qaadista hagaajiya.",
-        "features": ["Point of Sale", "Kayd Otomaatik", "Nidaamka Barcode"]
+        "features": [
+          "Point of Sale",
+          "Kayd Otomaatik",
+          "Nidaamka Barcode"
+        ]
       },
       "electronics": {
         "title": "Dukaamada Elektarooniga",
         "description": "La soco qalab kasta serial number, warranty, iyo dayactirka macaamiishaagu aaminayaan.",
-        "features": ["Serial Number Tracking", "Maamulka Warranty", "Tigidhada Dayactirka"]
+        "features": [
+          "Serial Number Tracking",
+          "Maamulka Warranty",
+          "Tigidhada Dayactirka"
+        ]
       },
       "pharmacy": {
         "title": "Farmashiyada & Caafimaadka",
         "description": "Kontoroolka batch iyo expiry oo leh diiwaan iib iyo dawooyin oo cad.",
-        "features": ["Batch & Expiry", "Diiwaanka Iibka", "Diiwaanka Dawada"]
+        "features": [
+          "Batch & Expiry",
+          "Diiwaanka Iibka",
+          "Diiwaanka Dawada"
+        ]
       },
       "wholesale": {
         "title": "Jumlo & Qaybinta",
         "description": "Maamul bakhaarro badan, amarrada iibsiga, iyo logistics hal nidaam.",
-        "features": ["Bakhaarro Badan", "Amarrada Iibsiga", "Isku-duwidda Logistics"]
+        "features": [
+          "Bakhaarro Badan",
+          "Amarrada Iibsiga",
+          "Isku-duwidda Logistics"
+        ]
       },
       "services": {
         "title": "Shirkadaha Adeegga & La-talinta",
         "description": "Hel macaamiil CRM, u dir invoice otomaatik, oo kharashka xakamee.",
-        "features": ["CRM Pipeline", "Invoice Otomaatik", "Kharashka La Socodka"]
+        "features": [
+          "CRM Pipeline",
+          "Invoice Otomaatik",
+          "Kharashka La Socodka"
+        ]
       },
       "manufacturing": {
         "title": "Warshadaha & Dharka",
         "description": "Maamul BOM, work orders, iyo silsiladda sahayda si cad.",
-        "features": ["Bill of Materials", "Work Orders", "Supply Chain"]
+        "features": [
+          "Bill of Materials",
+          "Work Orders",
+          "Supply Chain"
+        ]
       }
     }
   },
@@ -295,5 +319,36 @@
   "Common": {
     "learnMore": "Wax badan ogow",
     "backHome": "Ku noqo bogga hore"
+  },
+  "Clients": {
+    "eyebrow": "Wadaagayaasha lagu kalsoon yahay",
+    "title": "Shirkadaha KeydTech la shaqeeyso",
+    "subtitle": "Laga bilaabo Odoo ERP illaa apps iyo websites — kuwani waa kooxaha iyo hay'adaha aan u bixino xalalka Soomaaliya oo dhan.",
+    "empty": "Sheekooyinka clients-ka waa la diyaarinayaa. Markale soo noqo.",
+    "stats": {
+      "years": "Sanooyin khibrad",
+      "projects": "Mashaariic la qabtay",
+      "experts": "Khabiirada kooxda",
+      "clients": "Clients & wadaagayaal"
+    },
+    "industry": {
+      "RETAIL": "Tukaan",
+      "PHARMACY": "Farmashiye",
+      "ELECTRONICS": "Elektaroonig",
+      "WHOLESALE": "Jumlo",
+      "SERVICES": "Adeegyo",
+      "MANUFACTURING": "Warshad",
+      "NGO": "NGO",
+      "GOVERNMENT": "Dawlad",
+      "OTHER": "Wax kale"
+    },
+    "work": {
+      "ODOO": "Odoo ERP",
+      "WEBSITE": "Website",
+      "APP": "App",
+      "SYSTEM": "Nidaam gaar ah",
+      "POS_RETAIL": "POS Tukaan",
+      "OTHER": "Mashruuc technology"
+    }
   }
 }

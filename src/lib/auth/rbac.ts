@@ -37,3 +37,8 @@ export function canEditPost(
 export function authorAllowedStatuses() {
   return ["DRAFT", "PENDING_REVIEW"] as const;
 }
+
+/** Only Super Admin manages public clients / trust stats. */
+export function canManageClients(role: Role) {
+  return role === Role.SUPER_ADMIN;
+}

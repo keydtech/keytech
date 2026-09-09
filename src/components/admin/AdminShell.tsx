@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   FileText,
   FolderOpen,
+  Handshake,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -20,6 +21,7 @@ const NAV = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/posts", label: "Posts", icon: FileText },
   { href: "/admin/categories", label: "Categories", icon: FolderOpen },
+  { href: "/admin/clients", label: "Clients", icon: Handshake },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/profile", label: "Profile", icon: UserRound },
 ] as const;
@@ -29,6 +31,7 @@ type AdminShellProps = {
   userRole: string;
   showUsers?: boolean;
   showCategories?: boolean;
+  showClients?: boolean;
   children: React.ReactNode;
 };
 
@@ -37,6 +40,7 @@ export function AdminShell({
   userRole,
   showUsers = false,
   showCategories = true,
+  showClients = false,
   children,
 }: AdminShellProps) {
   const pathname = usePathname();
@@ -44,6 +48,7 @@ export function AdminShell({
   const nav = NAV.filter((item) => {
     if (item.href === "/admin/users" && !showUsers) return false;
     if (item.href === "/admin/categories" && !showCategories) return false;
+    if (item.href === "/admin/clients" && !showClients) return false;
     return true;
   });
 
