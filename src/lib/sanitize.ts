@@ -77,7 +77,7 @@ export function sanitizeBlogHtml(html: string): string {
 }
 
 const SAFE_URL =
-  /^(https:\/\/[^\s]+|\/uploads\/[a-zA-Z0-9._/-]+|\/images\/[a-zA-Z0-9._/-]+)$/;
+  /^(https:\/\/[^\s]+|\/uploads\/[a-zA-Z0-9._/-]+|\/images\/[a-zA-Z0-9._/-]+|\/api\/media\/uploads\/[a-zA-Z0-9._/%-]+)$/;
 
 export function sanitizeMediaUrl(url: string | null | undefined): string | null {
   const value = (url ?? "").trim();
@@ -92,6 +92,9 @@ export function sanitizeMediaUrl(url: string | null | undefined): string | null 
     } catch {
       throw new Error("Invalid image URL");
     }
+  }
+  if (value.startsWith("/api/media/") && value.includes("..")) {
+    throw new Error("Invalid image URL");
   }
   return value;
 }

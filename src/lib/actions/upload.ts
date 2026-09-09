@@ -79,19 +79,54 @@ function assertImageFile(file: FileLike) {
   return mime === "image/jpg" ? "image/jpeg" : mime;
 }
 
+function isPrivateStoreError(err: unknown) {
+  const message = err instanceof Error ? err.message : String(err);
+  return /private store|public access on a private/i.test(message);
+}
+
+function mediaProxyPath(key: string) {
+  return `/api/media/${key.split("/").map(encodeURIComponent).join("/")}`;
+}
+
+async function putToBlob(key: string, buffer: Buffer, mime: string) {
+  const token = process.env.BLOB_READ_WRITE_TOKEN;
+  if (!token) return null;
+
+  const preferPrivate =
+    process.env.BLOB_ACCESS === "private" ||
+    process.env.BLOB_STORE_ACCESS === "private";
+
+  if (!preferPrivate) {
+    try {
+      const blob = await put(key, buffer, {
+        access: "public",
+        token,
+        contentType: mime,
+      });
+      return blob.url;
+    } catch (err) {
+      if (!isPrivateStoreError(err)) throw err;
+      // Fall through to private upload + app proxy URL.
+    }
+  }
+
+  await put(key, buffer, {
+    access: "private",
+    token,
+    contentType: mime,
+  });
+
+  // Private blobs are not publicly readable — serve via our authenticated proxy.
+  return mediaProxyPath(key);
+}
+
 async function storeFile(file: FileLike, folder: string, mime: string) {
   const ext = EXT_BY_TYPE[mime] ?? "bin";
   const key = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    const blob = await put(key, buffer, {
-      access: "public",
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      contentType: mime,
-    });
-    return blob.url;
-  }
+  const blobUrl = await putToBlob(key, buffer, mime);
+  if (blobUrl) return blobUrl;
 
   const dir = path.join(process.cwd(), "public", folder);
   await mkdir(dir, { recursive: true });
@@ -111,7 +146,12 @@ async function uploadImage(
 }
 
 function toUploadError(err: unknown): string {
-  if (err instanceof Error && err.message) return err.message;
+  if (err instanceof Error && err.message) {
+    if (isPrivateStoreError(err)) {
+      return "Blob store is private — retry upload (proxy will be used automatically).";
+    }
+    return err.message;
+  }
   return "Upload failed";
 }
 
