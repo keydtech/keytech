@@ -3,20 +3,44 @@ export const SITE_URL =
 
 export const SITE_NAME = "KeydTech";
 
-export const CONTACT = {
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "keydtechnology@gmail.com",
-  whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "25261xxxxxxx",
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "+252 61 XXX XXXX",
-  address:
-    process.env.NEXT_PUBLIC_ADDRESS ?? "Mogadishu, Somalia",
-} as const;
+function resolvePublicContact() {
+  const envWhatsApp = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").trim();
+  const envPhone = (process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? "").trim();
+  const envEmail = (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "").trim();
+
+  // Ignore placeholders like 25261xxxxxxx so live contact always works.
+  const whatsappNumber =
+    envWhatsApp && !/[xX]{3,}/.test(envWhatsApp)
+      ? envWhatsApp.replace(/\D/g, "")
+      : "252772127799";
+
+  const phoneDisplay =
+    envPhone && !/[xX]{3,}/.test(envPhone) ? envPhone : "+252 772127799";
+
+  const email =
+    envEmail.includes("@") ? envEmail : "keydtechnology@gmail.com";
+
+  return {
+    email,
+    whatsappNumber,
+    phoneDisplay,
+    address:
+      process.env.NEXT_PUBLIC_ADDRESS?.trim() || "Mogadishu, Somalia",
+  } as const;
+}
+
+export const CONTACT = resolvePublicContact();
 
 export const WHATSAPP_PREFILL =
-  "Hello KeydTech, I want to inquire about Odoo ERP for my business.";
+  "Hello KeydTech, I want to inquire about your technology services (apps, websites, systems, or Odoo ERP).";
 
 export function getWhatsAppUrl(message: string = WHATSAPP_PREFILL) {
-  return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const digits = CONTACT.whatsappNumber.replace(/\D/g, "");
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
+
+export function getMailtoUrl(subject: string, body: string) {
+  return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 export const NAV_ITEMS = [

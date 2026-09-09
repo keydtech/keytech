@@ -1,18 +1,18 @@
 {
   "Metadata": {
-    "title": "KeydTech | Odoo ERP Soomaaliya — Nidaamyada Ganacsiga Muqdisho",
-    "description": "KeydTech waxay hirgelisaa oo habaysaa Odoo ERP tukaamada, farmashiyada, dukaamada elektarooniga, jumlada, iyo ganacsatada yaryar ee Muqdisho. Fududee kaydka, POS, xisaabaadka, iyo iibka.",
-    "keywords": "Odoo ERP Soomaaliya, Nidaamyada Ganacsiga Muqdisho, KeydTech Odoo, Odoo Muqdisho, ERP Somalia, POS Soomaaliya",
-    "ogTitle": "KeydTech — Hirgelinta Odoo ERP ee Muqdisho",
-    "ogDescription": "Hirgeliyaha Odoo ee ugu horreeya Soomaaliya. POS, kayd, xisaab, iyo otomaatig loogu talagalay ganacsiga maxalliga ah.",
-    "solutionsTitle": "Xalalka Odoo | KeydTech Soomaaliya",
-    "solutionsDescription": "Xalalka Odoo ee ku habboon tukaamada, farmashiyada, elektarooniga, jumlada, adeegyada, iyo warshadaha Soomaaliya.",
-    "pricingTitle": "Qiimaha & Demo | KeydTech Odoo ERP",
-    "pricingDescription": "Xirmooyin cad oo Odoo ah iyo demo bilaash ah oo loogu talagalay ganacsiga Muqdisho iyo Soomaaliya.",
-    "aboutTitle": "Ku saabsan KeydTech | Khabiirada Odoo ee Muqdisho",
-    "aboutDescription": "Baro KeydTech — shirkad ku taal Muqdisho oo ku takhasustay hirgelinta Odoo ERP, habaynta, iyo otomaatiga ganacsiga.",
-    "contactTitle": "Nala soo xiriir | WhatsApp & Demo",
-    "contactDescription": "Nala soo xiriir si aad demo bilaash ah u hesho. Si degdeg ah noogu soo qor WhatsApp."
+    "title": "KeydTech | Shirkad Technology — Apps, Websites & Odoo ERP Soomaaliya",
+    "description": "KeydTech waa shirkad technology ah oo Muqdisho ku taal — waxaan dhisnaa apps, websites, iyo nidaamyada ganacsiga. Odoo ERP waa middeenna ugu weyn, oo ay weheliyaan software gaar ah oo loogu talagalay ganacsatada Soomaaliyeed.",
+    "keywords": "KeydTech Soomaaliya, shirkad technology Muqdisho, app development, website development, Odoo ERP Soomaaliya, nidaamyada ganacsiga",
+    "ogTitle": "KeydTech — Technology loogu talagalay ganacsiga Soomaaliyeed",
+    "ogDescription": "Apps, websites, iyo systems oo laga keeno Muqdisho. Odoo ERP waa awooddeenna ugu weyn — oo ay weheliyaan xalal digital oo dhammaystiran.",
+    "solutionsTitle": "Xalalka | KeydTech — Nidaamyada warshadaha Soomaaliya",
+    "solutionsDescription": "Nidaamyo iyo Odoo ERP oo ku habboon tukaamada, farmashiyada, elektarooniga, jumlada, adeegyada, iyo warshadaha Soomaaliya.",
+    "pricingTitle": "Qiimaha & Demo | KeydTech Technology",
+    "pricingDescription": "Xirmooyin cad iyo demo bilaash ah oo loogu talagalay apps, websites, systems, iyo Odoo ERP ee Muqdisho iyo Soomaaliya.",
+    "aboutTitle": "Ku saabsan KeydTech | Shirkad Technology Muqdisho",
+    "aboutDescription": "Baro KeydTech — shirkad technology ah oo Muqdisho ku taal oo bixisa apps, websites, nidaamyo gaar ah, iyo Odoo ERP.",
+    "contactTitle": "Nala soo xiriir | WhatsApp & Email",
+    "contactDescription": "Nala soo xiriir si aad u hesho apps, websites, systems, ama demo Odoo. WhatsApp ama email noo soo dir."
   },
   "Nav": {
     "home": "Hore",
@@ -30,16 +30,16 @@
   },
   "Hero": {
     "brand": "KeydTech",
-    "headline": "Fududee Maamulka Ganacsigaaga",
-    "subhead": "Nidaamka Odoo ERP ee ku habboon Tukaankaaga, Farmashiyahaaga, ama Ganacsigaaga — kayd, POS, xisaab, iyo iib mid ah.",
+    "headline": "Technology dhisaysa ganacsigaaga",
+    "subhead": "Waxaan naqshadeeynaa oo bixinaa apps, websites, iyo nidaamyada ganacsiga — Odoo ERP-na waa middeenna ugu weyn ee kaydka, POS, xisaabaadka, iyo koboca Soomaaliya.",
     "primaryCta": "Si degdeg ah noogu soo qor WhatsApp",
     "secondaryCta": "Eeg Xalalka",
     "location": "Muqdisho, Soomaaliya"
   },
   "Solutions": {
-    "eyebrow": "Xalalka warshadaha",
-    "title": "Xalalka Odoo ee Ganacsigaaga",
-    "subtitle": "Habab Odoo oo loogu talagalay tukaamada iyo shirkadaha dhaqaalaha Soomaaliya ku tiirsan.",
+    "eyebrow": "Waxa aan bixino",
+    "title": "Nidaamyo loogu talagalay warshadaha Soomaaliya",
+    "subtitle": "Laga bilaabo hirgelinta Odoo ERP illaa apps iyo websites gaar ah — loogu talagalay tukaamada iyo shirkadaha dhaqaalaha Soomaaliya ku tiirsan.",
     "viewAll": "Dhammaan xalalka eeg",
     "items": {
       "retail": {
@@ -48,91 +48,91 @@
         "features": ["Point of Sale", "Kayd Otomaatik", "Nidaamka Barcode"]
       },
       "electronics": {
-        "title": "Dukaamada Elektarooniga & Qalabka",
-        "description": "La soco qalab kasta serial number, dammaanad, iyo dayactir macaamiishaadu ku kalsoonaadaan.",
-        "features": ["Serial Number Tracking", "Maamulka Dammaanadda", "Dayactirka"]
+        "title": "Dukaamada Elektarooniga",
+        "description": "La soco qalab kasta serial number, warranty, iyo dayactirka macaamiishaagu aaminayaan.",
+        "features": ["Serial Number Tracking", "Maamulka Warranty", "Tigidhada Dayactirka"]
       },
       "pharmacy": {
         "title": "Farmashiyada & Caafimaadka",
-        "description": "Xakamaynta batch iyo taariikhda dhicitaanka, iyo diiwaanka iibka/dawada si ammaan ah.",
+        "description": "Kontoroolka batch iyo expiry oo leh diiwaan iib iyo dawooyin oo cad.",
         "features": ["Batch & Expiry", "Diiwaanka Iibka", "Diiwaanka Dawada"]
       },
       "wholesale": {
-        "title": "Jumladaha & Qaybinta",
-        "description": "Maamul bakhaarro badan, amarrada iibsiga, iyo logistics — dhammaantood hal nidaam.",
-        "features": ["Bakhaarro Badan", "Purchase Orders", "Logistics"]
+        "title": "Jumlo & Qaybinta",
+        "description": "Maamul bakhaarro badan, amarrada iibsiga, iyo logistics hal nidaam.",
+        "features": ["Bakhaarro Badan", "Amarrada Iibsiga", "Isku-duwidda Logistics"]
       },
       "services": {
-        "title": "Adeegyada & La-talinta",
-        "description": "CRM macaamiisha, biilal otomaatik ah, iyo la socodka kharashka.",
-        "features": ["CRM", "Biilal Otomaatik", "Kharashaadka"]
+        "title": "Shirkadaha Adeegga & La-talinta",
+        "description": "Hel macaamiil CRM, u dir invoice otomaatik, oo kharashka xakamee.",
+        "features": ["CRM Pipeline", "Invoice Otomaatik", "Kharashka La Socodka"]
       },
       "manufacturing": {
         "title": "Warshadaha & Dharka",
-        "description": "Bill of Materials, work orders, iyo silsiladda sahayda si cad oo la maamuli karo.",
+        "description": "Maamul BOM, work orders, iyo silsiladda sahayda si cad.",
         "features": ["Bill of Materials", "Work Orders", "Supply Chain"]
       }
     }
   },
   "Why": {
     "title": "Maxay ganacsatadu u doorataan KeydTech",
-    "subtitle": "Khibrad maxalli ah. Odoo heer sare ah. Natiijooyin aad dukaankaaga ku arki karto.",
+    "subtitle": "Wadaag technology oo dhammaystiran oo Muqdisho ku yaal — apps, websites, iyo systems, oo ay hoggaaminayso khibradda Odoo.",
     "items": {
       "local": {
-        "title": "Koox ku taal Muqdisho",
-        "description": "Taageero dhab ah oo fahmaysa ganacsiga tukaamada, jumlada, iyo adeegyada Soomaaliya."
+        "title": "Wadaag Muqdisho ku saleysan",
+        "description": "Taageero dhulka joogta oo fahamta tukaamada, jumlada, iyo adeegyada Soomaaliyeed."
       },
       "odoo": {
-        "title": "Khabiirada Odoo",
-        "description": "Hirgelin, habayn, iyo tababar ku wajahan module-yada ganacsigaagu dhab ahaan u baahan yahay."
+        "title": "Technology dhammaystiran",
+        "description": "Apps mobile & web, websites casri ah, nidaamyo gaar ah — Odoo ERP-na waa takhasuskeenna ugu xooggan."
       },
       "speed": {
         "title": "Si degdeg ah u bilow",
-        "description": "Hirgelin wax ku ool ah oo POS, kaydka, iyo xisaabaadka isku xirta — bilaa jahwareer dheer."
+        "description": "Hirgelin wax ku ool ah oo ka dhigaysa badeecaddaada ama hawlgalkaaga mid shaqeeya — bilaa jahwareer dheer."
       },
       "support": {
         "title": "Taageero joogto ah",
-        "description": "Tababar kooxdaada iyo jawaab degdeg ah marka iibku kulul yahay."
+        "description": "Tababar kooxdaada iyo caawimo degdeg ah marka saacadaha mashquulka badan ay baahan yihiin."
       }
     }
   },
   "Process": {
-    "title": "Sidaan u keenno Odoo",
-    "subtitle": "Waddo cad oo ka bilaabata wadahadal ilaa nidaam kooxdaadu maalin kasta ku tiirsan tahay.",
+    "title": "Sida aan u bixino",
+    "subtitle": "Waddo cad oo ka bilaabata wadahadalka ugu horreeya illaa software kooxdaadu maalin kasta ku tiirsan tahay.",
     "steps": {
       "discover": {
-        "title": "Faham",
-        "description": "Waan sawirnaa habkaaga shaqada — iib, kayd, iibsi, iyo maaliyad."
+        "title": "Ogaansho",
+        "description": "Waxaan khariidaynaa ujeeddooyinkaaga — app, website, ama ERP dhammaystiran."
       },
       "configure": {
-        "title": "Habayn",
-        "description": "Odoo waxaa loo habaynayaa alaabtaada, bakhaarradaada, iyo warbixinnadaada."
+        "title": "Naqshad & dhismo",
+        "description": "Waxaan doorannaa stack-ka saxda ah: Odoo, apps gaar ah, ama website nadiif ah."
       },
       "train": {
-        "title": "Tababar & furitaan",
-        "description": "Kooxdaadu way barataa nidaamka, ka dibna kalsooni ayaan ku furaynaa."
+        "title": "Tababar & bilow",
+        "description": "Kooxdaadu way barataa nidaamka, ka dibna kalsooni ayaan ku bilaabnaa."
       },
       "grow": {
         "title": "Taageero & kobocin",
-        "description": "Waan kula jirnaa markaad laamaha, alaabta, iyo module-yada ku darto."
+        "description": "Waan kula joognaa markaad ku darto features, laamo, alaab, iyo isticmaalayaal."
       }
     }
   },
   "Cta": {
     "title": "Ma diyaar baad u tahay inaad ganacsigaaga casriyaysid?",
-    "subtitle": "Nala soo xiriir si aad demo bilaash ah u hesho. Waxaan ku tusi doonaa Odoo oo u shaqaynaya ganacsi kula mid ah.",
+    "subtitle": "Nala soo xiriir WhatsApp si aad talo bilaash ah u hesho. Apps, websites, systems, ama Odoo — waddada saxda ah ayaan kuu tilmaami doonaa.",
     "button": "Si degdeg ah noogu soo qor WhatsApp",
     "secondary": "Codso demo"
   },
   "Pricing": {
     "title": "Qiimaha & demo-yada",
-    "subtitle": "Xirmooyin cad oo loogu talagalay ganacsiga koraya — ku bilow demo bilaash ah oo ku habboon warshaddaada.",
+    "subtitle": "Xirmooyin cad oo loogu talagalay ganacsiga koraya — ku bilow demo bilaash ah oo ku habboon baahidaada.",
     "demoBadge": "Demo bilaash ah ayaa jirta",
     "plans": {
       "starter": {
         "name": "Bilow",
         "price": "Qiime gaar ah",
-        "description": "Ku habboon dukaanka hal goob ah ee u baahan POS iyo kayd.",
+        "description": "Ku habboon dukaanka hal goob ah ee u baahan POS, kayd, ama joogitaanka digital.",
         "features": [
           "Odoo POS & Kayd",
           "Dejinta xisaabaadka aasaasiga",
@@ -143,10 +143,10 @@
       "growth": {
         "name": "Kobocin",
         "price": "Qiime gaar ah",
-        "description": "Loogu talagalay tukaamada laamo badan, farmashiyada, iyo jumlada.",
+        "description": "Loogu talagalay tukaamada laamo badan iyo shirkadaha u baahan nidaamyo qoto dheer.",
         "features": [
           "Bakhaarro badan & iibsi",
-          "Module-yada warshadda oo la habeeyey",
+          "Ikhtiyaarka website ama app",
           "Dashboard-yada warbixinta",
           "Hirgelin mudnaan leh"
         ],
@@ -155,24 +155,46 @@
       "enterprise": {
         "name": "Enterprise",
         "price": "Qiime gaar ah",
-        "description": "Habayn qoto dheer, isku-xirid, iyo taageero gaar ah.",
+        "description": "Apps gaar ah, websites, isku-xirid, iyo delivery gaar ah.",
         "features": [
-          "Habab shaqo oo gaar ah",
+          "Apps & websites gaar ah",
           "Isku-xirid & u-guurinta xogta",
-          "Manufacturing / CRM horumarsan",
+          "Odoo / CRM / manufacturing horumarsan",
           "Maareeye guul gaar ah"
         ]
       }
     },
     "cta": "Ku ballanso demo bilaash ah WhatsApp",
-    "note": "Qiimaha ugu dambeeya wuxuu ku xiran yahay module-yada, isticmaalayaasha, iyo baaxadda habaynta. Si cad ayaan kuu soo gudbin doonaa ka dib wadahadal gaaban."
+    "note": "Qiimaha ugu dambeeya wuxuu ku xiran yahay baaxadda — apps, websites, Odoo, isticmaalayaasha, iyo habaynta. Si cad ayaan kuu soo gudbin doonaa ka dib wadahadal gaaban."
   },
   "About": {
     "title": "Ku saabsan KeydTech",
-    "subtitle": "Hirgeliyaha Odoo ee ugu horreeya ee ku yaal Muqdisho, Soomaaliya.",
-    "story": "KeydTech waxay ka caawisaa tukaamada, farmashiyada, dukaamada elektarooniga, jumlada, iyo shirkadaha adeegga inay ka baxaan spreadsheet-yada iyo qalabka kala fog — una gudbaan hal nidaam Odoo oo isku xiran. Waxaan isku darnaa khibrad badeecadeed iyo fahamka ganacsiga maxalliga ah.",
+    "subtitle": "Shirkad technology ah oo Muqdisho ku taal oo dhisaysa laf-dhabarta digital ee ganacsiga Soomaaliyeed.",
+    "eyebrow": "Yaa nahay",
+    "story": "KeydTech waxay ku bilaabatay takhasus Odoo ERP — taasi weli waa middeenna ugu xooggan. Maanta waxaan u shaqeynaa sidii shirkad technology oo dhammaystiran: waxaan naqshadeeynaa apps, dhisnaa websites, oo bixinaa nidaamyada ganacsatadu u baahan yihiin si ay u iibiyaan, u kaydiyaan, u xisaabiyaan, una koraan.",
+    "storySecondary": "Waxaan gacanta isku hayaa mulkiilayaasha iyo kooxaha Muqdisho iyo Soomaaliya. Fahamkaas maxalliga ah — dhaqdhaqaaqa suuqa, lacagaha, iyo sida shaqaaluhu u shaqeeyaan — ayaa ka dhigaya software-keenna mid la isticmaalo.",
     "missionTitle": "Himiladeenna",
-    "mission": "Inaan nidaamyada ganacsiga heerka adduunka ka dhigno kuwo la heli karo, wax ku ool ah, oo faa'iido u leh ganacsatada yaryar ee Soomaaliya.",
+    "mission": "Inaan technology heerka adduunka ka dhigno mid la heli karo, wax ku ool ah, oo faa'iido u leh ganacsiga Soomaaliyeed — ha ahaato Odoo ERP, app gaar ah, ama website xooggan.",
+    "servicesTitle": "Waxa aan dhisno",
+    "servicesSubtitle": "Hal wadaag oo stack-ka shirkaddaadu u baahan tahay.",
+    "services": {
+      "odoo": {
+        "title": "Odoo ERP (ugu weyn)",
+        "description": "Hirgelin, habayn, iyo tababar POS, kayd, xisaab, CRM, iyo manufacturing."
+      },
+      "apps": {
+        "title": "Apps mobile & web",
+        "description": "Applications gaar ah oo loogu talagalay iibka, hawlgalka, portals, iyo workflows gudaha."
+      },
+      "websites": {
+        "title": "Websites & joogitaan digital",
+        "description": "Bogag marketing iyo ganacsi oo casri ah oo brand-kaaga matala oo su'aalaha u beddela macaamiil."
+      },
+      "systems": {
+        "title": "Nidaamyada ganacsiga",
+        "description": "Isku-xirid, otomaatik, iyo platforms ku habboon qalabka aad hore u isticmaashay."
+      }
+    },
     "valuesTitle": "Waxa aan u taaganahay",
     "values": {
       "clarity": {
@@ -187,21 +209,45 @@
         "title": "Wada-shaqeyn",
         "description": "Waxaan guuleysannaa marka kaydkaaga, iibkaaga, iyo lacagahaagu si wanaagsan u socdaan."
       }
-    }
+    },
+    "stats": {
+      "focus": {
+        "value": "Odoo-first",
+        "label": "Takhasuska ugu weyn"
+      },
+      "scope": {
+        "value": "Full stack",
+        "label": "Apps · Web · Systems"
+      },
+      "base": {
+        "value": "Muqdisho",
+        "label": "Delivery maxalli ah"
+      }
+    },
+    "ctaTitle": "Aan wada dhisno waxa xiga",
+    "ctaSubtitle": "Noo sheeg dukaankaaga, shirkaddaada, ama fikraddaada — waddada saxda ah ayaan kuu soo jeedin doonaa.",
+    "ctaWhatsApp": "WhatsApp nagula hadal",
+    "ctaContact": "Foomka xiriirka"
   },
   "Contact": {
     "title": "Nala soo xiriir",
-    "subtitle": "Noo sheeg ganacsigaaga — ama si degdeg ah noogu soo qor WhatsApp.",
+    "subtitle": "Noo sheeg mashruucaaga — apps, websites, systems, ama Odoo — ama si degdeg ah noogu soo qor WhatsApp.",
     "whatsapp": "Si degdeg ah noogu soo qor WhatsApp",
+    "emailCta": "Email noo soo dir",
     "emailLabel": "Email",
-    "phoneLabel": "Telefoon",
+    "phoneLabel": "Telefoon / WhatsApp",
     "addressLabel": "Goobta",
     "form": {
       "name": "Magaca buuxa",
       "business": "Magaca ganacsiga",
       "industry": "Nooca ganacsiga",
       "message": "Sidee kuu caawin karnaa?",
-      "submit": "U dir codsiga WhatsApp",
+      "submit": "U dir WhatsApp",
+      "submitEmail": "U dir Email",
+      "hint": "Dooro WhatsApp ama Email — fariintaadu waxay u furmi doontaa KeydTech.",
+      "openedWhatsApp": "WhatsApp ayaa furmaya fariintaada…",
+      "openedEmail": "App-ka email ayaa furmaya…",
+      "emailSubject": "Codsi KeydTech",
       "industries": {
         "retail": "Tukaan / Suuq weyn",
         "electronics": "Elektaroonig",
@@ -214,23 +260,23 @@
     }
   },
   "Footer": {
-    "tagline": "Hirgelinta Odoo ERP iyo otomaatiga ganacsiga ee Muqdisho, Soomaaliya.",
+    "tagline": "Shirkad technology ah oo Muqdisho ku taal — apps, websites, systems, iyo Odoo ERP loogu talagalay ganacsiga Soomaaliyeed.",
     "navTitle": "Navigation",
     "solutionsTitle": "Xalalka",
     "contactTitle": "Xiriir",
     "rights": "Dhammaan xuquuqaha waa la xafiday.",
-    "seoLine": "Odoo ERP Soomaaliya · Nidaamyada Ganacsiga Muqdisho · KeydTech Odoo"
+    "seoLine": "KeydTech Soomaaliya · Apps · Websites · Odoo ERP Muqdisho"
   },
   "WhatsApp": {
     "label": "Si degdeg ah noogu soo qor WhatsApp",
     "aria": "Kula sheekeyso KeydTech WhatsApp"
   },
   "Blog": {
-    "metaTitle": "Blog | KeydTech — Odoo & Nidaamyada Ganacsiga",
-    "metaDescription": "Hagayaal wax ku ool ah oo ku saabsan Odoo ERP, POS, kaydka, iyo ganacsiga Muqdisho iyo Soomaaliya.",
+    "metaTitle": "Blog | KeydTech — Technology & Nidaamyada Ganacsiga",
+    "metaDescription": "Hagayaal wax ku ool ah oo ku saabsan Odoo ERP, apps, websites, iyo ganacsiga Muqdisho iyo Soomaaliya.",
     "eyebrow": "Aragtiyo",
     "title": "Blog-ga KeydTech",
-    "subtitle": "Qoraallo wax ku ool ah oo ku saabsan Odoo ERP, hawlgalka tukaamada, iyo nidaamyada digital ee ganacsatada Soomaaliyeed.",
+    "subtitle": "Qoraallo wax ku ool ah oo ku saabsan technology, Odoo ERP, iyo nidaamyada digital ee ganacsatada Soomaaliyeed.",
     "allCategories": "Dhammaan",
     "search": "Raadi",
     "searchPlaceholder": "Raadi maqaallo…",

@@ -1,18 +1,18 @@
 {
   "Metadata": {
-    "title": "KeydTech | Odoo ERP Somalia — Business Systems Mogadishu",
-    "description": "KeydTech implements and customizes Odoo ERP for retail, pharmacies, electronics shops, wholesalers, and SMEs in Mogadishu, Somalia. Streamline inventory, POS, accounting, and sales.",
-    "keywords": "Odoo ERP Somalia, Business Systems Mogadishu, KeydTech Odoo, Odoo Mogadishu, ERP Somalia, POS Somalia, inventory management Somalia",
-    "ogTitle": "KeydTech — Odoo ERP Implementation in Mogadishu",
-    "ogDescription": "Premier Odoo ERP partner in Somalia. POS, inventory, accounting, and automation built for local businesses.",
-    "solutionsTitle": "Odoo Solutions | KeydTech Somalia",
-    "solutionsDescription": "Industry-ready Odoo ERP solutions for retail, pharmacies, electronics, wholesale, services, and manufacturing in Somalia.",
-    "pricingTitle": "Pricing & Demos | KeydTech Odoo ERP",
-    "pricingDescription": "Transparent Odoo ERP packages and free demos for businesses in Mogadishu and across Somalia.",
-    "aboutTitle": "About KeydTech | Odoo Experts in Mogadishu",
-    "aboutDescription": "Learn about KeydTech — Mogadishu-based specialists in Odoo ERP implementation, customization, and business automation.",
-    "contactTitle": "Contact KeydTech | WhatsApp & Demo Requests",
-    "contactDescription": "Contact KeydTech in Mogadishu for a free Odoo ERP demo. WhatsApp us immediately or send an inquiry."
+    "title": "KeydTech | Technology Company — Apps, Websites & Odoo ERP Somalia",
+    "description": "KeydTech is a Mogadishu technology company building apps, websites, and business systems. Odoo ERP is our flagship — plus custom software for retailers, pharmacies, and growing enterprises across Somalia.",
+    "keywords": "KeydTech Somalia, technology company Mogadishu, app development Somalia, website development Mogadishu, Odoo ERP Somalia, business systems, custom software Somalia",
+    "ogTitle": "KeydTech — Technology for Somali businesses",
+    "ogDescription": "Apps, websites, and systems from Mogadishu. Odoo ERP remains our core strength — with full-stack delivery for modern companies.",
+    "solutionsTitle": "Solutions | KeydTech — Systems for Somali industries",
+    "solutionsDescription": "Industry-ready systems and Odoo ERP setups for retail, pharmacies, electronics, wholesale, services, and manufacturing in Somalia.",
+    "pricingTitle": "Pricing & Demos | KeydTech Technology",
+    "pricingDescription": "Transparent packages and free demos for apps, websites, systems, and Odoo ERP in Mogadishu and across Somalia.",
+    "aboutTitle": "About KeydTech | Technology Company in Mogadishu",
+    "aboutDescription": "Learn about KeydTech — a Mogadishu technology company delivering apps, websites, custom systems, and Odoo ERP for Somali businesses.",
+    "contactTitle": "Contact KeydTech | WhatsApp & Email",
+    "contactDescription": "Contact KeydTech in Mogadishu for apps, websites, systems, or an Odoo ERP demo. WhatsApp or email us."
   },
   "Nav": {
     "home": "Home",
@@ -30,16 +30,16 @@
   },
   "Hero": {
     "brand": "KeydTech",
-    "headline": "Odoo ERP built for Somali businesses",
-    "subhead": "Streamline inventory, POS, accounting, and sales — from Mogadishu shops to growing enterprises.",
+    "headline": "Technology that builds your business",
+    "subhead": "We design and deliver apps, websites, and business systems — with Odoo ERP as our flagship platform for inventory, POS, accounting, and growth across Somalia.",
     "primaryCta": "WhatsApp Us Immediately",
     "secondaryCta": "Explore Solutions",
     "location": "Mogadishu, Somalia"
   },
   "Solutions": {
-    "eyebrow": "Industry solutions",
-    "title": "Odoo Solutions for Your Business",
-    "subtitle": "Purpose-built Odoo setups for the shops and companies that power Somalia’s economy.",
+    "eyebrow": "What we deliver",
+    "title": "Systems for every Somali industry",
+    "subtitle": "From Odoo ERP rollouts to custom apps and websites — purpose-built for the shops and companies that power Somalia’s economy.",
     "viewAll": "View all solutions",
     "items": {
       "retail": {
@@ -76,37 +76,37 @@
   },
   "Why": {
     "title": "Why businesses choose KeydTech",
-    "subtitle": "Local expertise. Enterprise-grade Odoo. Results you can measure on the shop floor.",
+    "subtitle": "A full technology partner in Mogadishu — apps, websites, and systems, led by deep Odoo expertise.",
     "items": {
       "local": {
         "title": "Mogadishu-based partnership",
         "description": "On-the-ground support that understands Somali retail, wholesale, and service operations."
       },
       "odoo": {
-        "title": "Odoo specialists",
-        "description": "Implementation, customization, and training focused on the modules your business actually needs."
+        "title": "Full-stack technology",
+        "description": "Mobile & web apps, modern websites, custom systems — and Odoo ERP as our strongest specialty."
       },
       "speed": {
         "title": "Go live faster",
-        "description": "Practical rollouts that get POS, stock, and accounting working together — without months of chaos."
+        "description": "Practical delivery that gets your product or operations working — without months of chaos."
       },
       "support": {
         "title": "Ongoing support",
-        "description": "Training for your team and responsive help when peak sales hours demand it."
+        "description": "Training for your team and responsive help when peak hours demand it."
       }
     }
   },
   "Process": {
-    "title": "How we deliver Odoo",
-    "subtitle": "A clear path from first conversation to a system your team relies on every day.",
+    "title": "How we deliver",
+    "subtitle": "A clear path from first conversation to software your team relies on every day.",
     "steps": {
       "discover": {
         "title": "Discover",
-        "description": "We map your workflows — sales, stock, purchasing, and finance."
+        "description": "We map your goals — whether that’s an app, a website, or a full ERP workflow."
       },
       "configure": {
-        "title": "Configure",
-        "description": "Odoo is tailored to your products, warehouses, and reporting needs."
+        "title": "Design & build",
+        "description": "We craft the right stack: Odoo modules, custom apps, or a polished web presence."
       },
       "train": {
         "title": "Train & launch",
@@ -114,25 +114,25 @@
       },
       "grow": {
         "title": "Support & grow",
-        "description": "We stay with you as you add branches, products, and modules."
+        "description": "We stay with you as you add features, branches, products, and users."
       }
     }
   },
   "Cta": {
     "title": "Ready to modernize your business?",
-    "subtitle": "Message us on WhatsApp for a free demo. We’ll show Odoo running for a business like yours.",
+    "subtitle": "Message us on WhatsApp for a free consultation. Apps, websites, systems, or Odoo — we’ll map the right path.",
     "button": "WhatsApp Us Immediately",
     "secondary": "Request a demo"
   },
   "Pricing": {
     "title": "Pricing & demos",
-    "subtitle": "Clear packages for growing businesses — start with a free demo tailored to your industry.",
+    "subtitle": "Clear packages for growing businesses — start with a free demo tailored to your needs.",
     "demoBadge": "Free demo available",
     "plans": {
       "starter": {
         "name": "Starter",
         "price": "Custom quote",
-        "description": "Ideal for single-location shops ready for POS and inventory.",
+        "description": "Ideal for single-location shops ready for POS, inventory, or a focused digital presence.",
         "features": [
           "Odoo POS & Inventory",
           "Basic accounting setup",
@@ -143,10 +143,10 @@
       "growth": {
         "name": "Growth",
         "price": "Custom quote",
-        "description": "For multi-branch retailers, pharmacies, and distributors.",
+        "description": "For multi-branch retailers, pharmacies, and companies needing deeper systems.",
         "features": [
           "Multi-warehouse & purchasing",
-          "Industry modules configured",
+          "Website or app module options",
           "Reporting dashboards",
           "Priority implementation"
         ],
@@ -155,24 +155,46 @@
       "enterprise": {
         "name": "Enterprise",
         "price": "Custom quote",
-        "description": "Advanced customization, integrations, and dedicated support.",
+        "description": "Custom apps, websites, integrations, and dedicated delivery.",
         "features": [
-          "Custom workflows & apps",
+          "Custom apps & websites",
           "Integrations & data migration",
-          "Advanced manufacturing / CRM",
+          "Advanced Odoo / CRM / manufacturing",
           "Dedicated success manager"
         ]
       }
     },
     "cta": "Book a free demo on WhatsApp",
-    "note": "Final pricing depends on modules, users, and customization scope. We’ll quote transparently after a short discovery call."
+    "note": "Final pricing depends on scope — apps, websites, Odoo modules, users, and customization. We’ll quote transparently after a short discovery call."
   },
   "About": {
     "title": "About KeydTech",
-    "subtitle": "Premier Odoo ERP partner based in Mogadishu, Somalia.",
-    "story": "KeydTech helps retailers, pharmacies, electronics shops, wholesalers, and service companies replace spreadsheets and fragmented tools with one connected Odoo system. We combine deep product expertise with local business context — so your ERP fits how Mogadishu actually trades.",
+    "subtitle": "A Mogadishu technology company building the digital backbone of Somali business.",
+    "eyebrow": "Who we are",
+    "story": "KeydTech started as an Odoo ERP specialist — and that remains our strongest offering. Today we operate as a full technology company: we design apps, build websites, and deliver the systems businesses need to sell, stock, invoice, and grow. From neighborhood shops to expanding enterprises, we turn messy tools into one clear digital operation.",
+    "storySecondary": "We work side by side with owners and teams in Mogadishu and across Somalia. That local context — market rhythms, cashflow realities, and how staff actually work — is what makes our software stick.",
     "missionTitle": "Our mission",
-    "mission": "Make world-class business systems accessible, practical, and profitable for Somali SMEs.",
+    "mission": "Make world-class technology accessible, practical, and profitable for Somali businesses — whether that’s a flagship Odoo ERP, a custom app, or a high-converting website.",
+    "servicesTitle": "What we build",
+    "servicesSubtitle": "One partner for the stack your company needs next.",
+    "services": {
+      "odoo": {
+        "title": "Odoo ERP (flagship)",
+        "description": "Implementation, customization, and training for POS, inventory, accounting, CRM, and manufacturing."
+      },
+      "apps": {
+        "title": "Mobile & web apps",
+        "description": "Custom applications for sales teams, operations, customer portals, and internal workflows."
+      },
+      "websites": {
+        "title": "Websites & digital presence",
+        "description": "Modern marketing and commerce sites that represent your brand and convert inquiries."
+      },
+      "systems": {
+        "title": "Business systems",
+        "description": "Integrations, automation, and tailored platforms that connect the tools you already use."
+      }
+    },
     "valuesTitle": "What we stand for",
     "values": {
       "clarity": {
@@ -187,21 +209,45 @@
         "title": "Partnership",
         "description": "We succeed when your stock, sales, and cashflow run smoother."
       }
-    }
+    },
+    "stats": {
+      "focus": {
+        "value": "Odoo-first",
+        "label": "Flagship expertise"
+      },
+      "scope": {
+        "value": "Full stack",
+        "label": "Apps · Web · Systems"
+      },
+      "base": {
+        "value": "Mogadishu",
+        "label": "Local delivery"
+      }
+    },
+    "ctaTitle": "Let’s build what’s next",
+    "ctaSubtitle": "Tell us about your shop, company, or product idea — we’ll recommend the right path.",
+    "ctaWhatsApp": "Chat on WhatsApp",
+    "ctaContact": "Contact form"
   },
   "Contact": {
     "title": "Contact KeydTech",
-    "subtitle": "Tell us about your business — or message us on WhatsApp right now.",
+    "subtitle": "Tell us about your project — apps, websites, systems, or Odoo — or message us on WhatsApp right now.",
     "whatsapp": "WhatsApp Us Immediately",
+    "emailCta": "Email us",
     "emailLabel": "Email",
-    "phoneLabel": "Phone",
+    "phoneLabel": "Phone / WhatsApp",
     "addressLabel": "Location",
     "form": {
       "name": "Full name",
       "business": "Business name",
       "industry": "Industry",
       "message": "How can we help?",
-      "submit": "Send inquiry via WhatsApp",
+      "submit": "Send via WhatsApp",
+      "submitEmail": "Send via Email",
+      "hint": "Choose WhatsApp or Email — your message opens ready to send to KeydTech.",
+      "openedWhatsApp": "Opening WhatsApp with your message…",
+      "openedEmail": "Opening your email app…",
+      "emailSubject": "KeydTech inquiry",
       "industries": {
         "retail": "Retail / Supermarket",
         "electronics": "Electronics",
@@ -214,23 +260,23 @@
     }
   },
   "Footer": {
-    "tagline": "Odoo ERP implementation and business automation in Mogadishu, Somalia.",
+    "tagline": "Technology company in Mogadishu — apps, websites, systems, and Odoo ERP for Somali businesses.",
     "navTitle": "Navigate",
     "solutionsTitle": "Solutions",
     "contactTitle": "Contact",
     "rights": "All rights reserved.",
-    "seoLine": "Odoo ERP Somalia · Business Systems Mogadishu · KeydTech Odoo"
+    "seoLine": "KeydTech Somalia · Apps · Websites · Odoo ERP Mogadishu"
   },
   "WhatsApp": {
     "label": "WhatsApp Us Immediately",
     "aria": "Chat with KeydTech on WhatsApp"
   },
   "Blog": {
-    "metaTitle": "Blog | KeydTech Insights — Odoo & Business Systems",
-    "metaDescription": "Practical guides on Odoo ERP, retail POS, inventory, and growing businesses in Mogadishu and Somalia.",
+    "metaTitle": "Blog | KeydTech Insights — Technology & Business Systems",
+    "metaDescription": "Practical guides on Odoo ERP, apps, websites, retail operations, and growing businesses in Mogadishu and Somalia.",
     "eyebrow": "Insights",
     "title": "KeydTech Blog",
-    "subtitle": "Practical writing on Odoo ERP, retail operations, and digital systems for Somali businesses.",
+    "subtitle": "Practical writing on technology, Odoo ERP, and digital systems for Somali businesses.",
     "allCategories": "All",
     "search": "Search",
     "searchPlaceholder": "Search articles…",

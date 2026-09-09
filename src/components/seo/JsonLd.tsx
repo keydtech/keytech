@@ -42,7 +42,7 @@ export function JsonLd({ locale, description }: JsonLdProps) {
   const software = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Odoo ERP by KeydTech",
+    name: "KeydTech Technology Services",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     description,
@@ -59,15 +59,29 @@ export function JsonLd({ locale, description }: JsonLdProps) {
     },
   };
 
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/images/keydtech-logo.png`,
+    email: CONTACT.email,
+    telephone: CONTACT.phoneDisplay,
+    sameAs: [getWhatsAppSameAs()],
+    description,
+  };
+
   return (
     <ServerInsertedJsonLd
-      payloads={[toJsonLd(localBusiness), toJsonLd(software)]}
+      payloads={[
+        toJsonLd(localBusiness),
+        toJsonLd(organization),
+        toJsonLd(software),
+      ]}
     />
   );
 }
 
 function getWhatsAppSameAs() {
-  const number =
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "25261xxxxxxx";
-  return `https://wa.me/${number}`;
+  return `https://wa.me/${CONTACT.whatsappNumber.replace(/\D/g, "")}`;
 }

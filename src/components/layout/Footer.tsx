@@ -81,7 +81,7 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-teal"
               >
-                WhatsApp
+                {CONTACT.phoneDisplay}
               </a>
             </li>
           </ul>
@@ -93,7 +93,7 @@ export async function Footer() {
           <p>
             © {new Date().getFullYear()} KeydTech. {t("rights")}
           </p>
-          <p>Mogadishu · Odoo ERP Somalia</p>
+          <p>{t("seoLine")}</p>
         </div>
       </div>
     </footer>
