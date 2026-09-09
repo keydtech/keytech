@@ -105,13 +105,32 @@ export function ClientsManager({
 
   async function onUpload(file: File) {
     try {
+      if (!file.type && !/\.(jpe?g|png|webp|gif)$/i.test(file.name)) {
+        toast.error("Only JPEG, PNG, WebP, or GIF images are allowed");
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Image must be under 5MB");
+        return;
+      }
+
       const body = new FormData();
       body.set("file", file);
-      const url = await uploadClientLogo(body);
-      setForm((prev) => ({ ...prev, logoUrl: url }));
+      const result = await uploadClientLogo(body);
+      if (!result.ok) {
+        toast.error(result.error);
+        return;
+      }
+      setForm((prev) => ({ ...prev, logoUrl: result.url }));
       toast.success("Logo uploaded");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Upload failed");
+      const raw = err instanceof Error ? err.message : "Upload failed";
+      const message =
+        raw.includes("Minified React error #441") ||
+        raw.includes("Server Components render")
+          ? "Logo upload failed. Use a JPEG/PNG under 5MB and try again."
+          : raw;
+      toast.error(message);
     }
   }
 
@@ -318,7 +337,15 @@ export function ClientsManager({
 
         <label className="text-sm md:col-span-2">
           <span className="mb-1 block text-slate-300">Logo</span>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            {form.logoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={form.logoUrl}
+                alt=""
+                className="h-14 w-14 rounded-xl border border-white/10 bg-white object-contain p-1"
+              />
+            ) : null}
             <input
               value={form.logoUrl}
               onChange={(e) =>
@@ -329,10 +356,15 @@ export function ClientsManager({
             />
             <input
               type="file"
-              accept="image/jpeg,image/png,image/webp,image/gif"
+              accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,.jpeg,.jpg,.png,.webp,.gif"
               onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) void onUpload(file);
+                const input = e.currentTarget;
+                const file = input.files?.[0];
+                if (file) {
+                  void onUpload(file).finally(() => {
+                    input.value = "";
+                  });
+                }
               }}
               className="text-xs text-slate-300"
             />
