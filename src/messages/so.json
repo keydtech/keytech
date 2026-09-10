@@ -14,11 +14,14 @@
     "contactTitle": "Nala soo xiriir | WhatsApp & Email",
     "contactDescription": "Nala soo xiriir si aad u hesho apps, websites, systems, ama demo Odoo. WhatsApp ama email noo soo dir.",
     "clientsTitle": "Clients & Wadaagayaal | KeydTech",
-    "clientsDescription": "Arag shirkadaha iyo hay'adaha KeydTech u dhiseyso — Odoo ERP, apps, websites, iyo nidaamyo gaar ah oo Soomaaliya."
+    "clientsDescription": "Arag shirkadaha iyo hay'adaha KeydTech u dhiseyso — Odoo ERP, apps, websites, iyo nidaamyo gaar ah oo Soomaaliya.",
+    "keydAppTitle": "Keyd App | ERP Mobile loogu talagalay Tukaamada Soomaaliya — KeydTech",
+    "keydAppDescription": "Soo dejiso Keyd App — ERP qaab Odoo ah oo loogu talagalay tukaamada Soomaaliya. Iib, iibsi, xisaab, kayd, iyo lacag bixinta mobile money. Tijaabo bilaash ah 15 maalmood ka dib ansixinta."
   },
   "Nav": {
     "home": "Hore",
     "solutions": "Xalalka",
+    "keydApp": "Keyd App",
     "blog": "Maqaal",
     "pricing": "Qiimaha",
     "about": "Ku saabsan",
@@ -363,5 +366,51 @@
     "filterWork": "Nooca shaqada",
     "countLabel": "{count} wadaagayaal",
     "orbitLabel": "Dhaqdhaqaaq wadaagayaasheenna"
+  },
+  "KeydApp": {
+    "eyebrow": "ERP mobile tukaamada",
+    "subtitle": "ERP qaab Odoo ah oo loogu talagalay tukaamada Soomaaliya — iib, kayd, iyo xisaab ka maamul telefoonkaaga.",
+    "description": "Keyd App waxay modules-ka tukaankaagu u baahan yahay ku keentaa hal app mobile oo nadiif ah. Akoonkaaga ansixi, 15 maalmood tijaabi bilaash, ka dibna ku bixi mobile money.",
+    "trialBadge": "Tijaabo bilaash 15 maalmood",
+    "trialNote": "ka dib ansixinta",
+    "modulesTitle": "Lix module, hal app",
+    "modulesSubtitle": "Hawlgallada ugu muhiimsan ee tukaamada Soomaaliya — bilaa adkeysi desktop ah.",
+    "modules": {
+      "sales": {
+        "title": "Iibka",
+        "description": "Diiwaangeli iibka, bixi rasiid, oo la soco dakhliga maalinlaha ah dukaanka gudahiisa."
+      },
+      "purchase": {
+        "title": "Iibsiga",
+        "description": "Samee amarrada iibsiga, hel kaydka, oo la soco biilasha alaab-qeybiyeyaasha."
+      },
+      "accounting": {
+        "title": "Xisaabaadka",
+        "description": "Invoice, lacag bixin, iyo buugaag cad oo la jaan qaada sida ganacsigaagu u shaqeeyo."
+      },
+      "expense": {
+        "title": "Kharashka",
+        "description": "Diiwaangeli kharashka dukaanka oo arag lacagaha — ma jiraan buugaag kala firdhisan."
+      },
+      "inventory": {
+        "title": "Kaydka",
+        "description": "Ogow waxa shelf-ka yaal, waxa hooseeya, iyo waxa dib loo dalbanayo."
+      },
+      "settings": {
+        "title": "Dejinta",
+        "description": "Isticmaalayaal, laamo, canshuur, iyo doorashooyin — loo habeeyay dukaankaaga."
+      }
+    },
+    "billingTitle": "Ku bixi mobile money",
+    "billingDescription": "Iska diiwaangeli EVC Plus, Zaad, ama mobile money kale — lacag bixinta loogu talagalay sida ganacsiga Soomaaliyeed u bixiyo, ma aha foomamka kaadhka shisheeye.",
+    "downloadTitle": "Soo dejiso Keyd App",
+    "downloadSubtitle": "Waxaa laga heli karaa Android iyo iOS. Link-yadu way furmi doonaan marka stores-ku ansixiyaan — WhatsApp noogu soo qor si aad u hesho gelitaanka hore maanta.",
+    "googlePlay": "Ka soo qaado Google Play",
+    "appStore": "Ka soo dejiso App Store",
+    "earlyAccess": "Codso gelitaanka hore WhatsApp",
+    "earlyAccessNote": "Weli kuma jirto stores-ka? Waxaan gacanta ku soo gelinaynaa tukaamada la ansixiyay inta rollout-ku socdo.",
+    "ctaTitle": "Ma diyaar baad u tahay inaad dukaankaaga telefoonka ka maamusho?",
+    "ctaSubtitle": "Noo sheeg ganacsigaaga — tijaabadaada waan ansixin doonnaa oo waan kaa caawin doonnaa inaad bilowdo.",
+    "ctaWhatsApp": "WhatsApp nagula hadal"
   }
 }

@@ -39,6 +39,21 @@ export function getWhatsAppUrl(message: string = WHATSAPP_PREFILL) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 
+export const KEYD_APP_PLAY_URL =
+  process.env.NEXT_PUBLIC_KEYD_APP_PLAY_URL?.trim() || "#";
+
+export const KEYD_APP_STORE_URL =
+  process.env.NEXT_PUBLIC_KEYD_APP_STORE_URL?.trim() || "#";
+
+export const KEYD_APP_WHATSAPP_PREFILL =
+  "Hello KeydTech, I would like early access to Keyd App for my shop.";
+
+export function getKeydAppWhatsAppUrl(
+  message: string = KEYD_APP_WHATSAPP_PREFILL,
+) {
+  return getWhatsAppUrl(message);
+}
+
 export function getMailtoUrl(subject: string, body: string) {
   return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -46,6 +61,7 @@ export function getMailtoUrl(subject: string, body: string) {
 export const NAV_ITEMS = [
   { href: "/", key: "home" as const },
   { href: "/solutions", key: "solutions" as const },
+  { href: "/keyd-app", key: "keydApp" as const },
   { href: "/clients", key: "clients" as const },
   { href: "/blog", key: "blog" as const },
   { href: "/pricing", key: "pricing" as const },

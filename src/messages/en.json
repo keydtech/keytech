@@ -14,11 +14,14 @@
     "contactTitle": "Contact KeydTech | WhatsApp & Email",
     "contactDescription": "Contact KeydTech in Mogadishu for apps, websites, systems, or an Odoo ERP demo. WhatsApp or email us.",
     "clientsTitle": "Clients & Partners | KeydTech",
-    "clientsDescription": "See the companies and organizations KeydTech builds for — Odoo ERP, apps, websites, and custom systems in Somalia."
+    "clientsDescription": "See the companies and organizations KeydTech builds for — Odoo ERP, apps, websites, and custom systems in Somalia.",
+    "keydAppTitle": "Keyd App | Mobile ERP for Somali Shops — KeydTech",
+    "keydAppDescription": "Download Keyd App — Odoo-style ERP for Somali shops. Sales, purchase, accounting, inventory, and mobile money billing. 15-day free trial after approval."
   },
   "Nav": {
     "home": "Home",
     "solutions": "Solutions",
+    "keydApp": "Keyd App",
     "blog": "Blog",
     "pricing": "Pricing",
     "about": "About",
@@ -363,5 +366,51 @@
     "filterWork": "Work type",
     "countLabel": "{count} partners",
     "orbitLabel": "In motion with our partners"
+  },
+  "KeydApp": {
+    "eyebrow": "Mobile ERP for shops",
+    "subtitle": "Odoo-style ERP built for Somali shops — run sales, stock, and accounting from your phone.",
+    "description": "Keyd App brings the modules your tukaan needs into one clean mobile experience. Approve your account, try it free for 15 days, then pay with mobile money.",
+    "trialBadge": "15-day free trial",
+    "trialNote": "after approval",
+    "modulesTitle": "Six modules, one app",
+    "modulesSubtitle": "The core workflows Somali retailers rely on — without desktop complexity.",
+    "modules": {
+      "sales": {
+        "title": "Sales",
+        "description": "Record sales, issue receipts, and track daily revenue from the shop floor."
+      },
+      "purchase": {
+        "title": "Purchase",
+        "description": "Create purchase orders, receive stock, and stay on top of supplier bills."
+      },
+      "accounting": {
+        "title": "Accounting",
+        "description": "Invoices, payments, and clear books that match how your business actually runs."
+      },
+      "expense": {
+        "title": "Expense",
+        "description": "Log shop expenses and keep cashflow visible — no scattered notebooks."
+      },
+      "inventory": {
+        "title": "Inventory",
+        "description": "Know what is on the shelf, what is low, and what needs reordering."
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Users, branches, taxes, and preferences — configured for your shop."
+      }
+    },
+    "billingTitle": "Pay with mobile money",
+    "billingDescription": "Subscribe with EVC Plus, Zaad, or other mobile money — billing built for how Somali businesses pay, not foreign card forms.",
+    "downloadTitle": "Download Keyd App",
+    "downloadSubtitle": "Available on Android and iOS. Links go live as stores approve — message us on WhatsApp for early access today.",
+    "googlePlay": "Get it on Google Play",
+    "appStore": "Download on the App Store",
+    "earlyAccess": "Request early access on WhatsApp",
+    "earlyAccessNote": "Not on the stores yet? We onboard approved shops manually while rollout continues.",
+    "ctaTitle": "Ready to run your shop from your phone?",
+    "ctaSubtitle": "Tell us about your business — we will approve your trial and help you get started.",
+    "ctaWhatsApp": "Chat on WhatsApp"
   }
 }

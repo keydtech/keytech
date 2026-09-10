@@ -6,6 +6,7 @@ import type { MetadataRoute } from "next";
 const PATHS = [
   "",
   "/solutions",
+  "/keyd-app",
   "/clients",
   "/blog",
   "/pricing",
