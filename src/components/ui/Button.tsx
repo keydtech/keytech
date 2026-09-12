@@ -24,6 +24,8 @@ type ButtonProps = {
   children: React.ReactNode;
   target?: string;
   rel?: string;
+  /** Forces a plain anchor (e.g. APK file download). */
+  download?: boolean | string;
 };
 
 function isExternalHref(href: string) {
@@ -42,12 +44,19 @@ export function Button({
   href,
   target,
   rel,
+  download,
 }: ButtonProps) {
   const classes = cn(baseClass, variants[variant], className);
 
-  if (isExternalHref(href)) {
+  if (isExternalHref(href) || download !== undefined) {
     return (
-      <a href={href} target={target} rel={rel} className={classes}>
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        download={download === false ? undefined : download === true ? true : download}
+        className={classes}
+      >
         {children}
       </a>
     );

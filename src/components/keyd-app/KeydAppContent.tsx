@@ -3,19 +3,27 @@
 import { Button } from "@/components/ui/Button";
 import {
   getKeydAppWhatsAppUrl,
-  KEYD_APP_STORE_URL,
+  KEYD_APP_APK_URL,
   KEYD_APP_PLAY_URL,
+  KEYD_APP_STORE_URL,
 } from "@/lib/constants";
 import { motion } from "framer-motion";
 import {
+  BadgeCheck,
+  Building2,
   Calculator,
+  Download,
   MessageCircle,
   Package,
+  ShieldCheck,
   Settings2,
   ShoppingCart,
   Smartphone,
+  Store,
   Truck,
+  Users,
   Wallet,
+  WifiOff,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -26,6 +34,19 @@ const MODULES = [
   { key: "expense", icon: Wallet },
   { key: "inventory", icon: Package },
   { key: "settings", icon: Settings2 },
+] as const;
+
+const HOW_STEPS = [
+  { key: "register", icon: Smartphone },
+  { key: "approve", icon: BadgeCheck },
+  { key: "trial", icon: Store },
+  { key: "subscribe", icon: Wallet },
+] as const;
+
+const AUDIENCE = [
+  { key: "retail", icon: Store },
+  { key: "wholesale", icon: Building2 },
+  { key: "teams", icon: Users },
 ] as const;
 
 function StoreBadge({
@@ -43,14 +64,10 @@ function StoreBadge({
       target={href === "#" ? undefined : "_blank"}
       rel={href === "#" ? undefined : "noopener noreferrer"}
       aria-label={label}
-      className="group inline-flex min-h-[3.25rem] items-center gap-3 rounded-xl border border-border bg-surface/80 px-4 py-2.5 shadow-sm transition-all duration-300 hover:border-teal/50 hover:shadow-[0_12px_32px_-12px_rgba(0,212,178,0.35)] sm:min-h-[3.5rem] sm:px-5"
+      className="group inline-flex min-h-[2.75rem] items-center gap-2.5 rounded-lg border border-border bg-surface/80 px-3 py-2 shadow-sm transition-all duration-300 hover:border-teal/50 hover:shadow-[0_12px_32px_-12px_rgba(0,212,178,0.35)] sm:min-h-[3rem] sm:px-4"
     >
       {store === "google" ? (
-        <svg
-          viewBox="0 0 24 24"
-          className="h-7 w-7 shrink-0"
-          aria-hidden
-        >
+        <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" aria-hidden>
           <path
             fill="#4285F4"
             d="M3.6 1.8A2.4 2.4 0 0 0 2 4.1v15.8a2.4 2.4 0 0 0 1.6 2.3l8.4-8.4-8.4-8.4Z"
@@ -71,7 +88,7 @@ function StoreBadge({
       ) : (
         <svg
           viewBox="0 0 24 24"
-          className="h-7 w-7 shrink-0 text-foreground"
+          className="h-5 w-5 shrink-0 text-foreground"
           fill="currentColor"
           aria-hidden
         >
@@ -79,10 +96,10 @@ function StoreBadge({
         </svg>
       )}
       <span className="text-left leading-tight">
-        <span className="block text-[0.65rem] uppercase tracking-wide text-muted-fg">
+        <span className="block text-[0.6rem] uppercase tracking-wide text-muted-fg">
           {store === "google" ? "Google Play" : "App Store"}
         </span>
-        <span className="block text-sm font-semibold text-foreground group-hover:text-teal">
+        <span className="block text-xs font-semibold text-foreground group-hover:text-teal sm:text-sm">
           {label}
         </span>
       </span>
@@ -152,8 +169,10 @@ export function KeydAppContent() {
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="absolute -left-24 top-16 h-72 w-72 rounded-full bg-teal/15 blur-3xl" />
         <div className="absolute right-[-4rem] top-40 h-80 w-80 rounded-[2rem] bg-navy/10 blur-3xl dark:bg-teal/10" />
+        <div className="absolute bottom-40 left-1/3 h-64 w-64 rounded-full bg-navy/8 blur-3xl dark:bg-teal/5" />
       </div>
 
+      {/* Hero */}
       <section className="relative py-16 sm:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
           <div>
@@ -207,7 +226,35 @@ export function KeydAppContent() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.26 }}
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+              className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+            >
+              <Button
+                href={KEYD_APP_APK_URL}
+                download
+                variant="primary"
+                className="min-h-14 px-7 text-base shadow-[0_16px_40px_-16px_rgba(10,37,64,0.45)] dark:shadow-[0_16px_40px_-16px_rgba(0,212,178,0.35)]"
+              >
+                <Download className="h-5 w-5" aria-hidden />
+                {t("downloadApk")}
+              </Button>
+              <Button
+                href={getKeydAppWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="whatsapp"
+                className="min-h-12"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden />
+                {t("earlyAccess")}
+              </Button>
+            </motion.div>
+            <p className="mt-2 text-sm text-muted-fg">{t("downloadApkNote")}</p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.32 }}
+              className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap"
             >
               <StoreBadge
                 store="google"
@@ -220,31 +267,14 @@ export function KeydAppContent() {
                 label={t("appStore")}
               />
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.32 }}
-              className="mt-6"
-            >
-              <Button
-                href={getKeydAppWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="whatsapp"
-                className="min-h-12"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden />
-                {t("earlyAccess")}
-              </Button>
-              <p className="mt-2 text-sm text-muted-fg">{t("earlyAccessNote")}</p>
-            </motion.div>
+            <p className="mt-2 text-xs text-muted-fg">{t("earlyAccessNote")}</p>
           </div>
 
           <PhoneVisual />
         </div>
       </section>
 
+      {/* Features deep-dive */}
       <section className="relative border-y border-border/60 bg-surface/40 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
@@ -279,6 +309,78 @@ export function KeydAppContent() {
         </div>
       </section>
 
+      {/* How it works */}
+      <section className="relative py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
+              {t("howItWorksTitle")}
+            </h2>
+            <p className="mt-3 text-muted-fg">{t("howItWorksSubtitle")}</p>
+          </div>
+          <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {HOW_STEPS.map(({ key, icon: Icon }, index) => (
+              <motion.li
+                key={key}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="relative rounded-2xl border border-border bg-surface/60 p-6"
+              >
+                <span className="font-display text-3xl font-bold text-teal/40">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="mt-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-navy/10 text-navy dark:bg-teal/15 dark:text-teal">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </div>
+                <h3 className="mt-4 font-display text-lg font-semibold text-foreground">
+                  {t(`howItWorks.${key}.title`)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-fg">
+                  {t(`howItWorks.${key}.description`)}
+                </p>
+              </motion.li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Who it's for */}
+      <section className="relative border-y border-border/60 bg-surface/40 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
+              {t("audienceTitle")}
+            </h2>
+            <p className="mt-3 text-muted-fg">{t("audienceSubtitle")}</p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {AUDIENCE.map(({ key, icon: Icon }, index) => (
+              <motion.article
+                key={key}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="rounded-2xl border border-border bg-background/70 p-6"
+              >
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teal/12 text-navy dark:text-teal">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </div>
+                <h3 className="mt-4 font-display text-lg font-semibold text-foreground">
+                  {t(`audience.${key}.title`)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-fg">
+                  {t(`audience.${key}.description`)}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Security + billing */}
       <section className="relative py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-2">
@@ -289,12 +391,19 @@ export function KeydAppContent() {
               className="relative overflow-hidden rounded-3xl border border-teal/25 bg-gradient-to-br from-navy to-[#0d1f33] p-8 text-offwhite sm:p-10"
             >
               <div className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-teal/25 blur-2xl" />
-              <h2 className="relative font-display text-2xl font-semibold sm:text-3xl">
-                {t("billingTitle")}
+              <div className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-teal/20 text-teal">
+                <ShieldCheck className="h-5 w-5" aria-hidden />
+              </div>
+              <h2 className="relative mt-4 font-display text-2xl font-semibold sm:text-3xl">
+                {t("securityTitle")}
               </h2>
               <p className="relative mt-4 text-base leading-relaxed text-slate-200 sm:text-lg">
-                {t("billingDescription")}
+                {t("securityDescription")}
               </p>
+              <div className="relative mt-6 flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                <WifiOff className="mt-0.5 h-4 w-4 shrink-0 text-teal" aria-hidden />
+                <p className="text-sm text-slate-300">{t("offlineNote")}</p>
+              </div>
             </motion.div>
 
             <motion.div
@@ -305,10 +414,57 @@ export function KeydAppContent() {
               className="flex flex-col justify-center rounded-3xl border border-border bg-surface/70 p-8 sm:p-10"
             >
               <h2 className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
-                {t("downloadTitle")}
+                {t("billingTitle")}
               </h2>
-              <p className="mt-3 text-muted-fg">{t("downloadSubtitle")}</p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <p className="mt-4 text-base leading-relaxed text-muted-fg sm:text-lg">
+                {t("billingDescription")}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Download band */}
+      <section className="relative border-t border-border/60 bg-surface/40 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-navy via-[#0d1f33] to-navy p-8 text-offwhite sm:p-10"
+          >
+            <div className="pointer-events-none absolute -left-16 bottom-0 h-48 w-48 rounded-full bg-teal/20 blur-3xl" />
+            <div className="pointer-events-none absolute -right-10 top-0 h-40 w-40 rounded-full bg-teal/15 blur-2xl" />
+            <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+              <div>
+                <h2 className="font-display text-2xl font-semibold sm:text-3xl">
+                  {t("downloadTitle")}
+                </h2>
+                <p className="mt-3 max-w-xl text-slate-300">{t("downloadSubtitle")}</p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <Button
+                    href={KEYD_APP_APK_URL}
+                    download
+                    variant="primary"
+                    className="min-h-12 bg-teal text-midnight hover:bg-teal-dim dark:bg-teal dark:text-midnight"
+                  >
+                    <Download className="h-4 w-4" aria-hidden />
+                    {t("downloadApk")}
+                  </Button>
+                  <Button
+                    href={getKeydAppWhatsAppUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="whatsapp"
+                    className="min-h-12"
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden />
+                    {t("ctaWhatsApp")}
+                  </Button>
+                </div>
+                <p className="mt-3 text-sm text-slate-400">{t("downloadApkNote")}</p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
                 <StoreBadge
                   store="google"
                   href={KEYD_APP_PLAY_URL}
@@ -320,8 +476,8 @@ export function KeydAppContent() {
                   label={t("appStore")}
                 />
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}

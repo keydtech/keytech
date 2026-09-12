@@ -21,13 +21,14 @@
   "Nav": {
     "home": "Home",
     "solutions": "Solutions",
-    "keydApp": "Keyd App",
     "blog": "Blog",
     "pricing": "Pricing",
     "about": "About",
     "contact": "Contact",
     "cta": "WhatsApp",
     "ctaFull": "WhatsApp Us",
+    "getApp": "Get App",
+    "downloadApk": "Download APK",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleTheme": "Toggle color theme",
@@ -294,6 +295,8 @@
     "navTitle": "Navigate",
     "solutionsTitle": "Solutions",
     "contactTitle": "Contact",
+    "keydAppPage": "About Keyd App",
+    "downloadApp": "Download Keyd App",
     "rights": "All rights reserved.",
     "seoLine": "KeydTech Somalia · Apps · Websites · Odoo ERP Mogadishu"
   },
@@ -373,6 +376,8 @@
     "description": "Keyd App brings the modules your tukaan needs into one clean mobile experience. Approve your account, try it free for 15 days, then pay with mobile money.",
     "trialBadge": "15-day free trial",
     "trialNote": "after approval",
+    "downloadApk": "Download APK",
+    "downloadApkNote": "Android direct install — place the file on your phone and open it to install.",
     "modulesTitle": "Six modules, one app",
     "modulesSubtitle": "The core workflows Somali retailers rely on — without desktop complexity.",
     "modules": {
@@ -401,14 +406,53 @@
         "description": "Users, branches, taxes, and preferences — configured for your shop."
       }
     },
+    "howItWorksTitle": "How it works",
+    "howItWorksSubtitle": "From install to paying with mobile money — a clear path for every shop.",
+    "howItWorks": {
+      "register": {
+        "title": "Register",
+        "description": "Download the APK, create your shop account, and submit your business details."
+      },
+      "approve": {
+        "title": "Get approved",
+        "description": "Our team reviews your request and activates your shop for a guided start."
+      },
+      "trial": {
+        "title": "15-day trial",
+        "description": "Run real sales, stock, and books free for 15 days after approval."
+      },
+      "subscribe": {
+        "title": "Subscribe",
+        "description": "Continue with EVC Plus, Zaad, or mobile money — no foreign card forms."
+      }
+    },
+    "audienceTitle": "Built for Somali shops",
+    "audienceSubtitle": "Whether you run a tukaan, a wholesale counter, or a small team across branches.",
+    "audience": {
+      "retail": {
+        "title": "Retail & tukaan",
+        "description": "Fast counters, clear stock, and daily cash visibility for neighborhood shops."
+      },
+      "wholesale": {
+        "title": "Wholesale & supply",
+        "description": "Purchase orders, supplier bills, and inventory that keep distribution moving."
+      },
+      "teams": {
+        "title": "Owners & staff",
+        "description": "Give cashiers and managers the right access without sharing one notebook."
+      }
+    },
+    "securityTitle": "Secure by design",
+    "securityDescription": "Your shop data stays protected with account controls and approval-based access — built for businesses that cannot afford surprises.",
+    "offlineNote": "Designed with unreliable connectivity in mind — keep working when the network dips, then sync when you are back online.",
     "billingTitle": "Pay with mobile money",
     "billingDescription": "Subscribe with EVC Plus, Zaad, or other mobile money — billing built for how Somali businesses pay, not foreign card forms.",
     "downloadTitle": "Download Keyd App",
-    "downloadSubtitle": "Available on Android and iOS. Links go live as stores approve — message us on WhatsApp for early access today.",
+    "downloadSubtitle": "Get the Android APK now. Store links go live as Google Play and App Store approve — WhatsApp us for early access help.",
     "googlePlay": "Get it on Google Play",
     "appStore": "Download on the App Store",
-    "earlyAccess": "Request early access on WhatsApp",
-    "earlyAccessNote": "Not on the stores yet? We onboard approved shops manually while rollout continues.",
+    "earlyAccess": "WhatsApp early access",
+    "earlyAccessNote": "Prefer stores? Links go live when approved — we also onboard shops manually.",
     "ctaTitle": "Ready to run your shop from your phone?",
     "ctaSubtitle": "Tell us about your business — we will approve your trial and help you get started.",
     "ctaWhatsApp": "Chat on WhatsApp"

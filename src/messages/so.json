@@ -21,13 +21,14 @@
   "Nav": {
     "home": "Hore",
     "solutions": "Xalalka",
-    "keydApp": "Keyd App",
     "blog": "Maqaal",
     "pricing": "Qiimaha",
     "about": "Ku saabsan",
     "contact": "Xiriir",
     "cta": "WhatsApp",
     "ctaFull": "WhatsApp na soo qor",
+    "getApp": "Soo dejiso",
+    "downloadApk": "Soo dejiso APK",
     "openMenu": "Fur menu-ga",
     "closeMenu": "Xir menu-ga",
     "toggleTheme": "Beddel midabka",
@@ -294,6 +295,8 @@
     "navTitle": "Navigation",
     "solutionsTitle": "Xalalka",
     "contactTitle": "Xiriir",
+    "keydAppPage": "Faahfaahinta Keyd App",
+    "downloadApp": "Soo dejiso Keyd App",
     "rights": "Dhammaan xuquuqaha waa la xafiday.",
     "seoLine": "KeydTech Soomaaliya · Apps · Websites · Odoo ERP Muqdisho"
   },
@@ -373,6 +376,8 @@
     "description": "Keyd App waxay modules-ka tukaankaagu u baahan yahay ku keentaa hal app mobile oo nadiif ah. Akoonkaaga ansixi, 15 maalmood tijaabi bilaash, ka dibna ku bixi mobile money.",
     "trialBadge": "Tijaabo bilaash 15 maalmood",
     "trialNote": "ka dib ansixinta",
+    "downloadApk": "Soo dejiso APK",
+    "downloadApkNote": "Android toos ah — faylka geli telefoonkaaga oo fur si aad u rakibto.",
     "modulesTitle": "Lix module, hal app",
     "modulesSubtitle": "Hawlgallada ugu muhiimsan ee tukaamada Soomaaliya — bilaa adkeysi desktop ah.",
     "modules": {
@@ -401,14 +406,53 @@
         "description": "Isticmaalayaal, laamo, canshuur, iyo doorashooyin — loo habeeyay dukaankaaga."
       }
     },
+    "howItWorksTitle": "Sida ay u shaqeyso",
+    "howItWorksSubtitle": "Laga bilaabo rakibida illaa lacag bixinta mobile money — waddo cad dukaan kasta.",
+    "howItWorks": {
+      "register": {
+        "title": "Isdiiwaangeli",
+        "description": "Soo dejiso APK-ga, samee akoonka dukaankaaga, oo soo gudbi macluumaadka ganacsiga."
+      },
+      "approve": {
+        "title": "La ansixiyo",
+        "description": "Kooxdayadu way eegtaa codsigaaga oo way furtaa dukaankaaga si hagitaan leh."
+      },
+      "trial": {
+        "title": "Tijaabo 15 maalmood",
+        "description": "Ku shaqee iib dhab ah, kayd, iyo buugaag bilaash 15 maalmood ka dib ansixinta."
+      },
+      "subscribe": {
+        "title": "Iska diiwaangeli",
+        "description": "Ku sii wad EVC Plus, Zaad, ama mobile money — ma jiraan foomamka kaadhka shisheeye."
+      }
+    },
+    "audienceTitle": "Loogu talagalay tukaamada Soomaaliya",
+    "audienceSubtitle": "Haddii aad maamusho tukaan, jumlo, ama koox yar oo laamo kala duwan.",
+    "audience": {
+      "retail": {
+        "title": "Tukaan & retail",
+        "description": "Miis degdeg ah, kayd cad, iyo aragtida lacagta maalinlaha ah ee dukaamada xaafadda."
+      },
+      "wholesale": {
+        "title": "Jumlo & sahay",
+        "description": "Amarrada iibsiga, biilasha alaab-qeybiyeyaasha, iyo kaydka qaybinta socodsiiya."
+      },
+      "teams": {
+        "title": "Milkiilayaal & shaqaale",
+        "description": "Siin cashiers iyo maareeyayaasha gelitaan sax ah bilaa in la wadaago hal buug."
+      }
+    },
+    "securityTitle": "Ammaan by design",
+    "securityDescription": "Xogta dukaankaagu waa la ilaaliyaa kontoroolka akoonka iyo gelitaan ku salaysan ansixin — loogu talagalay ganacsiyada aan u baahnayn yaab.",
+    "offlineNote": "Loo sameeyay marka shabakaddu daciifto — sii shaqee marka network-ku hoos u dhaco, ka dibna sync samee markaad dib u soo noqoto.",
     "billingTitle": "Ku bixi mobile money",
     "billingDescription": "Iska diiwaangeli EVC Plus, Zaad, ama mobile money kale — lacag bixinta loogu talagalay sida ganacsiga Soomaaliyeed u bixiyo, ma aha foomamka kaadhka shisheeye.",
     "downloadTitle": "Soo dejiso Keyd App",
-    "downloadSubtitle": "Waxaa laga heli karaa Android iyo iOS. Link-yadu way furmi doonaan marka stores-ku ansixiyaan — WhatsApp noogu soo qor si aad u hesho gelitaanka hore maanta.",
+    "downloadSubtitle": "Hadda hel APK-ga Android. Link-yada stores-ku way furmi doonaan marka Google Play iyo App Store ansixiyaan — WhatsApp noogu soo qor caawimaad gelitaanka hore.",
     "googlePlay": "Ka soo qaado Google Play",
     "appStore": "Ka soo dejiso App Store",
-    "earlyAccess": "Codso gelitaanka hore WhatsApp",
-    "earlyAccessNote": "Weli kuma jirto stores-ka? Waxaan gacanta ku soo gelinaynaa tukaamada la ansixiyay inta rollout-ku socdo.",
+    "earlyAccess": "WhatsApp gelitaanka hore",
+    "earlyAccessNote": "Ma doorbidi stores? Link-yadu way furmi doonaan marka la ansixiyo — sidoo kale gacanta ayaan ku soo gelinaynaa tukaamada.",
     "ctaTitle": "Ma diyaar baad u tahay inaad dukaankaaga telefoonka ka maamusho?",
     "ctaSubtitle": "Noo sheeg ganacsigaaga — tijaabadaada waan ansixin doonnaa oo waan kaa caawin doonnaa inaad bilowdo.",
     "ctaWhatsApp": "WhatsApp nagula hadal"

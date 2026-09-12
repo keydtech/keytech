@@ -5,10 +5,10 @@ import { Logo } from "@/components/layout/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button, IconButton } from "@/components/ui/Button";
 import { Link, usePathname } from "@/i18n/navigation";
-import { getWhatsAppUrl, NAV_ITEMS } from "@/lib/constants";
+import { getWhatsAppUrl, KEYD_APP_APK_URL, NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, MessageCircle, X } from "lucide-react";
+import { Download, Menu, MessageCircle, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -41,7 +41,7 @@ export function Header() {
       <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center gap-3 px-4 sm:h-[4.75rem] sm:px-6 lg:px-8">
         <Logo priority className="min-w-0 shrink-0" />
 
-        {/* Desktop nav — xl+ only so 7 links never collide with language controls */}
+        {/* Desktop nav — xl+ only so links never collide with language controls */}
         <nav
           className="mx-3 hidden min-w-0 flex-1 items-center justify-center xl:flex"
           aria-label="Primary"
@@ -74,6 +74,15 @@ export function Header() {
           <LanguageSwitcher compact />
           <ThemeToggle />
           <Button
+            href={KEYD_APP_APK_URL}
+            download
+            variant="primary"
+            className="min-h-9 whitespace-nowrap px-3 py-1.5 text-xs"
+          >
+            <Download className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            {t("getApp")}
+          </Button>
+          <Button
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
@@ -85,10 +94,20 @@ export function Header() {
           </Button>
         </div>
 
-        {/* Mobile / tablet: language + theme + hamburger (no overlapping desktop nav) */}
+        {/* Mobile / tablet: language + theme + APK + hamburger */}
         <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2 xl:hidden">
           <LanguageSwitcher compact />
           <ThemeToggle />
+          <Button
+            href={KEYD_APP_APK_URL}
+            download
+            variant="primary"
+            aria-label={t("getApp")}
+            className="min-h-9 whitespace-nowrap px-2.5 py-1.5 text-xs sm:px-3"
+          >
+            <Download className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <span className="hidden sm:inline">{t("getApp")}</span>
+          </Button>
           <IconButton
             aria-label={open ? t("closeMenu") : t("openMenu")}
             aria-expanded={open}
@@ -128,7 +147,16 @@ export function Header() {
                   </Link>
                 );
               })}
-              <div className="mt-3 border-t border-border pt-4">
+              <div className="mt-3 flex flex-col gap-2 border-t border-border pt-4">
+                <Button
+                  href={KEYD_APP_APK_URL}
+                  download
+                  variant="primary"
+                  className="min-h-11 w-full text-sm"
+                >
+                  <Download className="h-4 w-4" aria-hidden />
+                  {t("getApp")}
+                </Button>
                 <Button
                   href={getWhatsAppUrl()}
                   target="_blank"

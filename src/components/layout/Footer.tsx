@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import {
   CONTACT,
   getWhatsAppUrl,
+  KEYD_APP_APK_URL,
   NAV_ITEMS,
   SOLUTION_IDS,
 } from "@/lib/constants";
@@ -22,6 +23,21 @@ export async function Footer() {
             {t("tagline")}
           </p>
           <p className="mt-4 text-xs text-teal/90">{t("seoLine")}</p>
+          <div className="mt-5 flex flex-col gap-2">
+            <Link
+              href="/keyd-app"
+              className="inline-flex text-sm font-semibold text-white transition-colors hover:text-teal"
+            >
+              {t("keydAppPage")}
+            </Link>
+            <a
+              href={KEYD_APP_APK_URL}
+              download
+              className="inline-flex text-sm font-semibold text-teal transition-colors hover:text-white"
+            >
+              {t("downloadApp")}
+            </a>
+          </div>
         </div>
 
         <div>
