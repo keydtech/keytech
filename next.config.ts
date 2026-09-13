@@ -92,6 +92,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    // Proxy Keyd App API so the mobile APK can use a stable HTTPS origin.
+    const api =
+      process.env.KEYD_APP_API_ORIGIN?.replace(/\/$/, "") ||
+      "https://keyd-app-api.vercel.app";
+    return [
+      {
+        source: "/keyd-api/:path*",
+        destination: `${api}/:path*`,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);
