@@ -9,6 +9,7 @@ export default function proxy(request: NextRequest) {
 
   if (
     pathname.startsWith("/admin") ||
+    pathname.startsWith("/ops") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/keyd-api") ||
     pathname.startsWith("/_next")
