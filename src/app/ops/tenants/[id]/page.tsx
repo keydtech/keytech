@@ -79,6 +79,24 @@ function appsForRole(role: TenantRole): string[] {
   return [...(ROLE_DEFAULT_APPS[role] ?? [])];
 }
 
+/** Friendly role names shown in Ops UI (API enum values unchanged). */
+function roleLabel(role: string): string {
+  switch (role) {
+    case "OWNER":
+      return "Owner";
+    case "MANAGER":
+      return "Sales";
+    case "CASHIER":
+      return "Cashier";
+    case "ACCOUNTANT":
+      return "Accounting";
+    case "INVENTORY":
+      return "Operation";
+    default:
+      return role;
+  }
+}
+
 function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white px-4 py-3.5 shadow-sm">
@@ -507,7 +525,7 @@ export default function TenantDetailPage() {
       closeModal();
       await load();
       toast.success(`User created: ${created.username || username}`, {
-        description: `They can log into the Keyd app with this username and the password you set. Role: ${created.role}.`,
+        description: `They can log into the Keyd app with this username and the password you set. Role: ${roleLabel(created.role)}.`,
         duration: 8000,
       });
     } catch (err) {
@@ -546,7 +564,7 @@ export default function TenantDetailPage() {
       toast.success(`Access updated for ${updated.name}`, {
         description: isOwner
           ? "Owner password/name saved."
-          : `Role ${updated.role} · apps: ${(updated.allowedApps ?? []).join(", ") || "none"}`,
+          : `Role ${roleLabel(updated.role)} · apps: ${(updated.allowedApps ?? []).join(", ") || "none"}`,
       });
     } catch (err) {
       const msg = err instanceof ApiError ? err.message : "Update failed.";
@@ -778,7 +796,7 @@ export default function TenantDetailPage() {
                         </div>
                       </div>
                       <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-700">
-                        {u.role}
+                        {roleLabel(u.role)}
                       </span>
                     </div>
                     <div className="mt-2 text-xs text-slate-500">
@@ -860,7 +878,7 @@ export default function TenantDetailPage() {
                               {u.email}
                             </div>
                           </td>
-                          <td className="px-4 py-3">{u.role}</td>
+                          <td className="px-4 py-3">{roleLabel(u.role)}</td>
                           <td className="max-w-xs px-4 py-3 text-xs text-slate-600">
                             {u.role === "OWNER"
                               ? "Full access"
@@ -1563,7 +1581,7 @@ export default function TenantDetailPage() {
               >
                 {ROLES.map((r) => (
                   <option key={r} value={r}>
-                    {r}
+                    {roleLabel(r)}
                   </option>
                 ))}
               </select>
@@ -1653,7 +1671,7 @@ export default function TenantDetailPage() {
                   >
                     {ROLES.map((r) => (
                       <option key={r} value={r}>
-                        {r}
+                        {roleLabel(r)}
                       </option>
                     ))}
                   </select>
